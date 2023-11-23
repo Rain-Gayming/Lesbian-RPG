@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a27a274f62a1654bad5ae9288af513d, type: 3}
+  m_Name: DL_Blacksmith Welcome
+  m_EditorClassIdentifier: 
+  line: Well hi Y/N welcome to Greymoor :3
+  responses:
+  - {fileID: 11400000, guid: 9b04826c023db5244b38c538f2853443, type: 2}
+  - {fileID: 11400000, guid: 8ad8fa6128aa7ca40b02d2311e7ed285, type: 2}
+  - {fileID: 11400000, guid: 8c5567f096e08774e9b5ce3cb42551fa, type: 2}
+  - {fileID: 11400000, guid: b4119bcb02ada774dadf18fc2ba255c2, type: 2}
+  questToGive: {fileID: 0}
+  itemReward:
+    item: {fileID: 0}
+    amount: 0

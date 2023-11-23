@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25fa2a0cff27f54bac41123c8f1bb3e, type: 3}
+  m_Name: SE_Leap
+  m_EditorClassIdentifier: 
+  effectName: Leap
+  spellType: 2
+  effectSprite: {fileID: 21300000, guid: 9e4d95ae4118ca74b868fb5b3ca96df0, type: 3}
+  manaCost: 10

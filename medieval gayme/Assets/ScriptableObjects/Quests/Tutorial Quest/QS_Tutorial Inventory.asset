@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3ebfd991df41f4d99f47d5dcf1c57d, type: 3}
+  m_Name: QS_Tutorial Inventory
+  m_EditorClassIdentifier: 
+  questStepType: 2
+  stepDescription: Talk to the blacksmith
+  whatToKill: 
+  howManyToKill: 0
+  whatToGet: {fileID: 0}
+  howManyToGet: 0
+  whoToTalkTo: Blacksmith
+  dialogLine: {fileID: 11400000, guid: 7b9ead2210ccf664aa2954d31a358ed6, type: 2}
+  step: 0

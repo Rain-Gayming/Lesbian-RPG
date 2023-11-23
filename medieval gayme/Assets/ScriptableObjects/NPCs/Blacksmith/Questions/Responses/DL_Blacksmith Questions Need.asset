@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a27a274f62a1654bad5ae9288af513d, type: 3}
+  m_Name: DL_Blacksmith Questions Need
+  m_EditorClassIdentifier: 
+  line: Well I do need a new supply of iron and coal I'm running a little low on
+    them.
+  responses: []
+  questToGive: {fileID: 11400000, guid: d247cd4eb547cbf459c520567e1e0a1f, type: 2}
+  itemReward:
+    item: {fileID: 0}
+    amount: 0
