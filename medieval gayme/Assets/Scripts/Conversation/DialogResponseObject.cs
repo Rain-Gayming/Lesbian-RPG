@@ -16,5 +16,7 @@ public class DialogResponseObject : ScriptableObject
     [BoxGroup("Response Info")]
     public QuestStep hideAfterStep;
     [BoxGroup("Response Info")]
+    public QuestObject hideOnQuest;
+    [BoxGroup("Response Info")]
     public QuestObject hideAfterQuest;
 }

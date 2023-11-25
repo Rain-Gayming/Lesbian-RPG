@@ -30,18 +30,6 @@ public class SpellBook : MonoBehaviour
     public PlayerEquipmentManager playerEquipmentManager;
 
 #region Spells
-    [BoxGroup("Spell Casting")]
-    public GameObject spellProjectile;
-    [BoxGroup("Spell Casting")]
-    public Transform spellSpawnPoint;
-    [BoxGroup("Spell Casting")]
-    public GameObject spellGoPoint;
-    [BoxGroup("Spell Casting")]
-    public LayerMask spellGoMask;
-    [BoxGroup("Spell Casting")]
-    public bool isCurrentlyHoldingSpell;
-    [BoxGroup("Spell Casting")]
-    public bool isCurrentlyCasting;
 
     [BoxGroup("Spells")]
     public SpellDatabase spellDatabase;
@@ -49,18 +37,9 @@ public class SpellBook : MonoBehaviour
     [BoxGroup("Spells")]
     public List<Spell> spells;
     [BoxGroup("Spells")]
-    public Spell currentSpell;
-    [BoxGroup("Spells")]
     public List<SpellEffect> unlockedEffects;
     [BoxGroup("Spells")]
     public List<SpellSlot> unlockedEffectSlots;
-
-    [BoxGroup("Spell Effects")]
-    [BoxGroup("Spell Effects/Bounce")]
-    public float bounceWaitTime;
-    [BoxGroup("Spell Effects/Bounce")]
-    public float bounceWaitTimer;
-    [BoxGroup("Spell Effects/Bounce")]
 #endregion
 
 #region Creation UI
@@ -111,13 +90,12 @@ public class SpellBook : MonoBehaviour
     {
         spellBookMenu.menu = spellBookUI;
 
-        spellSavePath = Application.persistentDataPath + "/"+ MainMenuManager.instance.playerName + 
+        spellSavePath = Application.persistentDataPath + "/" + MainMenuManager.instance.playerName + 
             "_SpellSaveData.json";
             
         if(File.Exists(spellSavePath)){
             LoadSpells();
         }
-
         spellBookMenu.Enable();    
         UpdateSpellBookUI();
         spellBookMenu.Disable();
@@ -130,203 +108,6 @@ public class SpellBook : MonoBehaviour
 
             menuManager.ChangeMenuWithPause(spellBookMenu);
         }    
-
-        if(currentSpell.spellName != string.Empty && !menuManager.isInMenu){
-            if(InputManager.instance.castSpell){
-                isCurrentlyHoldingSpell = true;
-                isCurrentlyCasting = true;
-                playerMovement.SetRotation();
-                spellGoPoint.SetActive(true);
-
-                if(!PlayerCameraManager.instance.isMagicCam && currentSpell.effects[0].effectName != "Self"){
-                    PlayerCameraManager.instance.MagicCamera();
-                }
-
-                RaycastHit hit;
-                if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, spellGoMask)){
-                    spellGoPoint.transform.position = hit.point;
-                    spellGoPoint.transform.LookAt(Camera.main.transform);
-                }
-    
-            }else{
-                if(isCurrentlyHoldingSpell){
-                    isCurrentlyHoldingSpell = false;
-                    InputManager.instance.castSpell = false;
-                    spellGoPoint.SetActive(false);
-                    PlayerCameraManager.instance.NormalCamera();
-                }
-            }
-        }
-
-        if(!isCurrentlyHoldingSpell && isCurrentlyCasting){
-            CastSpell();
-            isCurrentlyCasting = false;
-        }
-
-        if(bounceWaitTimer >= -1){
-            bounceWaitTimer -= Time.deltaTime;
-        }
-
-        if(bounceWaitTimer <= 0 && spellUsage.isBounce){
-            playerMovement.isBounce = true;
-
-            spellUsage.isBounce = false;
-        }
-    }
-
-    public void CastSpell()
-    {
-        CheckSpellEffects();
-        //Changes the type of spell based off the first effect
-        switch (currentSpell.effects[0].effectName)
-        {
-            case "Self":
-                StartCoroutine(SpellAnimationCo("Self"));
-            break;    
-            case "Ranged":
-                StartCoroutine(SpellAnimationCo("Ranged"));
-                GameObject newSpellProjectile = Instantiate(spellProjectile);
-                newSpellProjectile.transform.position = spellSpawnPoint.position;
-                newSpellProjectile.GetComponent<SpellProjectile>().spellUsage = spellUsage;
-                playerMovement.SetRotation();
-            break; 
-            case "Target":
-                //Do target stuff
-            break; 
-            case "Touch":
-                //Do touch stuff
-            break;     
-        } 
-    }
-
-    public IEnumerator SpellAnimationCo(string name)
-    {
-        switch (name)
-        {
-            case "Self":
-                playerMovement.playerAnim.SetBool("isSelfSpell", true);
-            break;    
-            case "Ranged":
-                playerMovement.playerAnim.SetBool("isRangedSpell", true);
-            break; 
-            case "Target":
-                //Do target stuff
-            break; 
-            case "Touch":
-                //Do touch stuff
-            break;     
-        } 
-
-        yield return new WaitForSeconds(0.35f);
-         
-        if(name == "Self"){
-            if(spellUsage.isHealing){
-                playerHealthManager.HealthChange(5 * spellUsage.amplifyModifier, false);
-            }
-            if(spellUsage.isDamage){
-                playerHealthManager.HealthChange(5 * spellUsage.amplifyModifier, true);
-            }
-            if(spellUsage.isQuickening){
-                playerMovement.speedMult = playerMovement.currentSpeed * 2 * spellUsage.amplifyModifier;
-                playerMovement.speedTimer = playerMovement.speedTime * spellUsage.lengthenModifier;    
-            }
-            if(spellUsage.isSlowing){
-                playerMovement.speedMult = playerMovement.currentSpeed * 0.5f * spellUsage.amplifyModifier;
-                playerMovement.speedTimer = playerMovement.speedTime * spellUsage.lengthenModifier;    
-            }
-            if(spellUsage.isJump){
-                playerMovement.velocity.y = 10 * spellUsage.amplifyModifier;
-            }
-            if(spellUsage.isBounce){
-                bounceWaitTimer = bounceWaitTime;
-            }
-            if(spellUsage.isLeaping){
-                playerMovement.isLeap = true;
-                playerMovement.direction += Camera.main.transform.forward * spellUsage.amplifyModifier;
-                playerMovement.velocity.y = 10 * spellUsage.amplifyModifier;
-            }
-            if(spellUsage.isStrengthening){
-                playerEquipmentManager.attackModifier = 2 * spellUsage.amplifyModifier;
-            }
-            if(spellUsage.isWeakening){
-                playerEquipmentManager.attackModifier = 0.5f * spellUsage.amplifyModifier;
-            }  
-        }
-
-        playerMovement.playerAnim.SetBool("isSelfSpell", false);
-        playerMovement.playerAnim.SetBool("isRangedSpell", false);
-    }
-
-    public void CheckSpellEffects()
-    {
-        spellUsage = new SpellUsage();
-
-        //God help me
-        for (int i = 0; i < currentSpell.effects.Count; i++)
-        {        
-            switch (currentSpell.effects[i].effectName)
-            {
-            #region Effects
-                case "Frenzy":
-                   spellUsage.isFrenzy = true;
-                break;
-                case "Calming":
-                    spellUsage.isCalming = true;
-                break;
-                case "Damage":
-                    spellUsage.isDamage = true;
-                break;
-                case "Heal":
-                    spellUsage.isHealing = true;
-                break;
-                case "Jump":
-                    spellUsage.isJump = true;
-                break;
-                case "Leap":
-                    spellUsage.isLeaping = true;
-                break;
-                case "Bounce":
-                    spellUsage.isBounce = true;
-                break;
-                case "Quicken":
-                    spellUsage.isQuickening = true;
-                break;
-                case "Slowness":
-                    spellUsage.isSlowing = true;
-                break;
-                case "Strengthen":
-                    spellUsage.isStrengthening = true;
-                break;
-                case "Weaken":
-                    spellUsage.isWeakening = true;
-                break;
-            #endregion
-            
-            #region Modifiers
-                case "Accelerate":
-                    spellUsage.acceleratingModifier++; 
-                break;
-                case "Delay":
-                    spellUsage.delayModifier++;
-                break;
-                case "AOE":
-                    spellUsage.aoeModifier++;
-                break;
-                case "Amplify":
-                    spellUsage.amplifyModifier++;
-                break;
-                case "Dampen":
-                    spellUsage.amplifyModifier--;
-                break;
-                case "Lengthen":
-                    spellUsage.lengthenModifier++;
-                break;
-                case "Pierce":
-                    spellUsage.peirceModifier++;
-                break;
-            #endregion
-            }
-        }
     }
 
     public void UnlockSpellEffect(SpellEffect effect)
@@ -409,7 +190,7 @@ public class SpellBook : MonoBehaviour
                     newSpellSlot.transform.SetParent(spellGrid);
                     newSpellSlot.transform.localScale = Vector3.one;   
 
-                    newSpellSlot.GetComponent<SpellSlot>().effect = iconSlot.effect;
+                    newSpellSlot.GetComponent<SpellSlot>().slotSpell.iconEffect = iconSlot.effect;
                     newSpellSlot.GetComponent<SpellSlot>().isSpell = true;
                     newSpellSlot.GetComponent<SpellSlot>().slotSpell = createdSpell;
 

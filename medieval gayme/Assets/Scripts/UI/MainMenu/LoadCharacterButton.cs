@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadCharacterButton : MonoBehaviour
 {
@@ -23,6 +24,6 @@ public class LoadCharacterButton : MonoBehaviour
     public void LoadCharacter()
     {
         MainMenuManager.instance.playerName = characterName;
-        SceneManager.LoadScene("World");
+        MainMenuManager.instance.LoadCharacter();
     }
 }

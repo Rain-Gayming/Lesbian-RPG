@@ -12,7 +12,9 @@ public class PlayerCameraManager : MonoBehaviour
     [BoxGroup("References")]
     public Transform cam;
     [BoxGroup("References")]
-    public CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera normalVirtualCamera;
+    [BoxGroup("References")]
+    public CinemachineVirtualCamera magicVirtualCamera;
     [BoxGroup("References")]
     public PlayerCamera playerCamera;
 
@@ -57,6 +59,7 @@ public class PlayerCameraManager : MonoBehaviour
     float xRotation;
     Vector3 prePos;
     Vector3 currentPos;
+    public Vector3 velocity;
 
     public void Awake()
     {
@@ -70,20 +73,19 @@ public class PlayerCameraManager : MonoBehaviour
 
     void Update() 
     {
-        if(!isMagicCam){
-            if(InputManager.instance.zoomValue.y < 0){
-                currentZoom -= zoomSpeed * Time.deltaTime;
-            }
-            if(InputManager.instance.zoomValue.y > 0){
-                currentZoom += zoomSpeed * Time.deltaTime;
-            }
-            if(currentZoom >= zoomMax){
-                currentZoom = zoomMax;
-            }else if(currentZoom <= zoomMin){
-                currentZoom = zoomMin;
-            }
-            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = currentZoom;
+        if(Input.mouseScrollDelta.y < 0){
+            currentZoom -= zoomSpeed * Time.deltaTime;
         }
+        if(Input.mouseScrollDelta.y > 0){
+            currentZoom += zoomSpeed * Time.deltaTime;
+        }
+        if(currentZoom >= zoomMax){
+            currentZoom = zoomMax;
+        }else if(currentZoom <= zoomMin){
+            currentZoom = zoomMin;
+        }
+        normalVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = currentZoom;       
+        magicVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = currentZoom;       
         
     }
     public void FixedUpdate()
@@ -93,7 +95,7 @@ public class PlayerCameraManager : MonoBehaviour
             currentPos = new Vector3(camPosX, camPosY, camPosZ);    
         }
         if(prePos != currentPos){
-            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = currentPos;
+            normalVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset = currentPos;
             prePos = currentPos;
         }
         
@@ -102,13 +104,14 @@ public class PlayerCameraManager : MonoBehaviour
     public void MagicCamera()
     {
         isMagicCam = true;
-        virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 2;
-        playerCamera.followTransform.transform.localPosition = magicCamPoint;
+        normalVirtualCamera.gameObject.SetActive(false);
+        magicVirtualCamera.gameObject.SetActive(true);
     }
 
     public void NormalCamera()
     {
         isMagicCam = false;  
-        playerCamera.followTransform.transform.localPosition = Vector3.Slerp(playerCamera.followTransform.transform.position, camPoint, lerpTime);    
+        normalVirtualCamera.gameObject.SetActive(true);
+        magicVirtualCamera.gameObject.SetActive(false);
     }
 }

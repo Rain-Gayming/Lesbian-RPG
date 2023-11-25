@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4148079103417816791}
   - component: {fileID: 3104828540546043852}
   - component: {fileID: 4173824870858983519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hovered
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +75,81 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7096927614136291931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170188733309767041}
+  - component: {fileID: 8156763746127360734}
+  - component: {fileID: 6787075250485738873}
+  m_Layer: 0
+  m_Name: Selected
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1170188733309767041
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096927614136291931}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1524501646918354664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 14, y: 14}
+  m_SizeDelta: {x: 28, y: 28}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8156763746127360734
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096927614136291931}
+  m_CullTransparentMesh: 1
+--- !u!114 &6787075250485738873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096927614136291931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7615603571009353042
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +161,7 @@ GameObject:
   - component: {fileID: 7085106548229505716}
   - component: {fileID: 5149398229205900444}
   - component: {fileID: 6400317093707736858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spell Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +236,7 @@ GameObject:
   - component: {fileID: 1524501646918354664}
   - component: {fileID: 3127999027033073999}
   - component: {fileID: 4054112921947605567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spell Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,6 +258,7 @@ RectTransform:
   - {fileID: 3254903917551262141}
   - {fileID: 7085106548229505716}
   - {fileID: 4148079103417816791}
+  - {fileID: 1170188733309767041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -203,11 +279,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 6400317093707736858}
+  selectedIcon: {fileID: 7096927614136291931}
   isSpell: 0
   slotSpell:
     effects: []
     spellName: 
     iconEffect: {fileID: 0}
+    manaCost: 0
   effect: {fileID: 0}
   spellCraftSlot: 0
   hovered: 0
@@ -224,15 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515d3c5656fc08c42887edd8be605f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
-  headerText: {fileID: 0}
-  contentText: {fileID: 0}
-  layoutElement: {fileID: 0}
-  characterWrapLimit: 0
   spellSlot: {fileID: 0}
-  spellTypeText: {fileID: 0}
-  effectTitleText: {fileID: 0}
-  effectsText: {fileID: 0}
+  content: 
+  header: 
 --- !u!1 &9059517606132453014
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +316,7 @@ GameObject:
   - component: {fileID: 3254903917551262141}
   - component: {fileID: 286068883360389549}
   - component: {fileID: 2819486078606093470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25882354, g: 0.18823531, b: 0.14901961, a: 1}
+  m_Color: {r: 0.38823533, g: 0.2901961, b: 0.227451, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

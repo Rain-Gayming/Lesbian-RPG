@@ -32,15 +32,7 @@ public class PlayerCamera : MonoBehaviour
             var angles = followTransform.transform.localEulerAngles;
 
             //Clamp the Up/Down rotation
-            if (angles.x > 180 && angles.x < 340)
-            {
-                angles.x = 340;
-            }
-            else if(angles.x < 180 && angles.x > 40)
-            {
-                angles.x = 40;
-            }
-
+            Mathf.Clamp(angles.x, -70, 70);
 
             followTransform.transform.localEulerAngles = angles;
             #endregion

@@ -10,6 +10,8 @@ public class SpellSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     [BoxGroup("References")]
     public Image itemIcon;
+    [BoxGroup("References")]
+    public GameObject selectedIcon;
 
     [BoxGroup("Spell")]
     public bool isSpell;
@@ -26,14 +28,14 @@ public class SpellSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject hoveredObject;
     
     void Start() {
-        if(effect){
+        if(slotSpell.iconEffect || effect){
             itemIcon.gameObject.SetActive(true);
             if(slotSpell.iconEffect){
                 itemIcon.sprite = slotSpell.iconEffect.effectSprite;
             }else{
                 itemIcon.sprite = effect.effectSprite;
-            }
-        }
+            }  
+        }      
     }
 
     void Update() {
@@ -50,7 +52,13 @@ public class SpellSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                     SpellBook.instance.iconSlot.effect = effect;
                 }
             }else{
-                SpellBook.instance.currentSpell = slotSpell;
+                PlayerSpellManager.instance.currentSpell = slotSpell;
+                selectedIcon.SetActive(true);
+            }
+        }
+        if(selectedIcon.activeInHierarchy){
+            if(PlayerSpellManager.instance.currentSpell != slotSpell){
+                selectedIcon.SetActive(false);
             }
         }
     }

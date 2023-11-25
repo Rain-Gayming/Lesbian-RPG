@@ -12,6 +12,8 @@ public class DialogBoxUI : MonoBehaviour
     public DialogObject currentDialog;
     [BoxGroup("References")]
     public DialogLineObject currentLine;
+    [BoxGroup("References")]
+    public QuestManager questManager;
 
     [BoxGroup("UI")]
     public Menu dialogMenu;
@@ -60,21 +62,21 @@ public class DialogBoxUI : MonoBehaviour
         dialogText.text.Replace("Y/N", PlayerManager.instance.playerName);
 
 
-        if(QuestManager.instance.quests.Count > 0){
-            for (int i = 0; i < QuestManager.instance.quests.Count; i++)
+        if(questManager.quests.Count > 0){
+            for (int i = 0; i < questManager.quests.Count; i++)
             {
-                int currentStep = QuestManager.instance.quests[i].currentStep;
-                QuestObject quest = QuestManager.instance.quests[i].currentQuest;
+                int currentStep = questManager.quests[i].currentStep;
+                QuestObject quest = questManager.quests[i].currentQuest;
                 if(quest.questSteps[currentStep].questStepType == EQuestStepType.talk){
                     if(quest.questSteps[currentStep].dialogLine == currentLine){
-                        QuestManager.instance.UpdateQuest(quest);
+                        questManager.UpdateQuest(quest);
                     }
                 }
             }
         }
 
         if(currentLine.questToGive != null){
-            QuestManager.instance.AddQuest(currentLine.questToGive);
+            questManager.AddQuest(currentLine.questToGive);
         }
 
         if(currentLine.itemReward.item != null){
@@ -99,12 +101,24 @@ public class DialogBoxUI : MonoBehaviour
         for (int i = 0; i < currentLine.responses.Count; i++)
         {
             if(currentLine.responses[i].hideAfterQuest){
-                for (int q = 0; q < QuestManager.instance.questsCompleted.Count; q++)
+                for (int q = 0; q < questManager.questsCompleted.Count; q++)
                 {
-                    if(currentLine.responses[i].hideAfterQuest == QuestManager.instance.questsCompleted[i]){
+                    if(currentLine.responses[i].hideAfterQuest == questManager.questsCompleted[i]){
 
                     }else{
-                        if(i >= QuestManager.instance.questsCompleted.Count){
+                        if(i >= questManager.questsCompleted.Count){
+                            AddNewResponse(i);
+                        }
+                    }
+                }
+            }
+            if(currentLine.responses[i].hideOnQuest){
+                for (int q = 0; q < questManager.quests.Count; q++)
+                {
+                    if(questManager.quests[q].currentQuest == currentLine.responses[i].hideOnQuest){
+
+                    }else{
+                        if(i >= questManager.quests.Count){
                             AddNewResponse(i);
                         }
                     }
@@ -113,10 +127,10 @@ public class DialogBoxUI : MonoBehaviour
             if(!currentLine.responses[i].showOnStep){
                 AddNewResponse(i);
             }else{
-                for (int q = 0; q < QuestManager.instance.quests.Count; q++)
+                for (int q = 0; q < questManager.quests.Count; q++)
                 {
-                    int currentStep = QuestManager.instance.quests[q].currentStep; 
-                    if(currentLine == QuestManager.instance.quests[q].currentQuest.questSteps[currentStep].dialogLine){
+                    int currentStep = questManager.quests[q].currentStep; 
+                    if(currentLine == questManager.quests[q].currentQuest.questSteps[currentStep].dialogLine){
                         AddNewResponse(i);
                     }
                 }
