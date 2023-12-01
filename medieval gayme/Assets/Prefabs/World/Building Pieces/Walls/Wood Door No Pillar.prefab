@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8192200231664145402}
   - component: {fileID: 4653679210619336558}
   - component: {fileID: 4766995512587082762}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5843299407236815848}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wood Door No Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

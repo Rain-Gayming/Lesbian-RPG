@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using JetBrains.Annotations;
 public class ItemDrag : MonoBehaviour
 {
     public static ItemDrag instance;
@@ -11,6 +12,8 @@ public class ItemDrag : MonoBehaviour
     public Image itemIcon;
     [BoxGroup("References")]
     public ChestInteractable chestFrom;
+    [BoxGroup("References")]
+    public AlterInteractable alterFrom;
     
     [BoxGroup("Slots")]
     public InventorySlot fromSlot;
@@ -43,12 +46,35 @@ public class ItemDrag : MonoBehaviour
     {
         chestFrom = _chestFrom;
     }
+    public void SetAlterFrom(AlterInteractable _alterFrom)
+    {
+        alterFrom = _alterFrom;
+    }
 
     public void MouseClicked(bool chestSlot)
     {
-        if(!fromSlot){
+        if(fromSlot == null){
             fromSlot = hoveredSlot;
         }else{
+            DoStuff();
+        }
+    }
+
+    public void DoStuff()
+    {
+        if(fromSlot.outputSlot){
+            
+            for (int i = 0; i < Inventory.instance.alterSlots.Count; i++)
+            {
+                if(!Inventory.instance.alterSlots[i].slot.outputSlot){ 
+                    Inventory.instance.alterSlots[i].slot.currentItem.amount -= 1;
+                    print("removing item from " + Inventory.instance.alterSlots[i].slot);
+                    Inventory.instance.alterSlots[i].slot.UpdateItem();
+                }                    
+            }
+        }
+
+        if(!hoveredSlot.cantTakeItem){
             if(hoveredSlot != fromSlot && fromSlot.currentItem.item){
                 
                 if(fromSlot.currentItem.item.canStack){
@@ -68,16 +94,16 @@ public class ItemDrag : MonoBehaviour
                 }
 
                 if(!hoveredSlot.hasRestriction){
-                    SwapSlots(chestSlot);
+                    SwapSlots();
                 }else{
                     if(hoveredSlot.itemRestriction != EItemType.equipment){
                         if(fromSlot.currentItem.item.itemType == hoveredSlot.itemRestriction){
-                            SwapSlots(chestSlot);
+                            SwapSlots();
                         }
                     }else{
                         if(fromSlot.currentItem.item.itemType == hoveredSlot.itemRestriction){                            
                             if(fromSlot.currentItem.item.equipmentType == hoveredSlot.equipmentRestriction){
-                                SwapSlots(chestSlot);
+                                SwapSlots();
                             }
                         }
                     }
@@ -89,12 +115,10 @@ public class ItemDrag : MonoBehaviour
         }
     }
 
-    public void SwapSlots(bool chestSlot)
+    public void SwapSlots()
     {
+        InventoryItem iii = fromSlot.currentItem;
         storedFromItem = fromSlot.currentItem;
-
-        fromSlot.currentItem = hoveredSlot.currentItem;
-        hoveredSlot.currentItem = storedFromItem;
 
         fromSlot.UpdateItem();
         hoveredSlot.UpdateItem();
@@ -110,8 +134,37 @@ public class ItemDrag : MonoBehaviour
                 chestFrom.chestItems.Add(storedFromItem);
             }
         }
+
+        if(fromSlot.alterSlot){
+
+            for (int i = 0; i < alterFrom.alterItems.Count; i++)
+            {
+                if(alterFrom.alterItems[i].slotPlace == fromSlot.alterPlace){
+                    InventoryItem ii = new InventoryItem(hoveredSlot.currentItem.item, hoveredSlot.currentItem.amount);
+                    alterFrom.alterItems[i].item = ii;
+                }
+            }
+        }
+
+        if(hoveredSlot.alterSlot)
+        {
+            print(hoveredSlot.alterPlace);
+            for (int i = 0; i < alterFrom.alterItems.Count; i++)
+            {
+                if(alterFrom.alterItems[i].slotPlace == hoveredSlot.alterPlace){
+                    
+                    InventoryItem ii = new InventoryItem(iii.item, iii.amount);
+                    alterFrom.alterItems[i].item = ii;
+                }
+            } 
+        }
+
+        fromSlot.currentItem = hoveredSlot.currentItem;
+        hoveredSlot.currentItem = storedFromItem;
+
         chestFrom = null;
         fromSlot = null;
+        hoveredSlot = null;
         storedFromItem = null;
     }
 }

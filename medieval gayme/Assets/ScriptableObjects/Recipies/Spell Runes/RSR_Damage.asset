@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31763d9c160d0a04091cbee83493aa60, type: 3}
+  m_Name: RSR_Damage
+  m_EditorClassIdentifier: 
+  topItem: {fileID: 11400000, guid: 632d7cdda226fb649875dd9d59a7b0b3, type: 2}
+  bottomItem: {fileID: 11400000, guid: 8887c7304ccd58346a52e95ef028cd9d, type: 2}
+  leftItem: {fileID: 11400000, guid: 0f292c08e3cbbfd4c8f3727aa449eedf, type: 2}
+  rightItem: {fileID: 11400000, guid: d7a951ff82030264cae1a3bfe489351a, type: 2}
+  outputItem: {fileID: 11400000, guid: 19992a6ea13b871469819ff91b25e904, type: 2}

@@ -11,6 +11,8 @@ public class InteractionCamera : MonoBehaviour
 
     
     [BoxGroup("Interacting")]
+    public float baseInteractionRange;
+    [BoxGroup("Interacting")]
     public float interactRange;
     [BoxGroup("Interacting")]
     public LayerMask interactMask;

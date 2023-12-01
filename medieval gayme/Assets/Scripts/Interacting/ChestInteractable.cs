@@ -21,6 +21,7 @@ public class ChestInteractable : Interactable
 
 
         Inventory.instance.inChest = true;
+        Inventory.instance.inAlter = false;
         Inventory.instance.OpenChest(chestItems, this);
         MenuManager.instance.ChangeMenuWithPause(Inventory.instance.inventoryMenu);
 

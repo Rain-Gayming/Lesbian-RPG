@@ -25,6 +25,23 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> chestSlots;
     [BoxGroup("Chest")]
     public GameObject armourSlots;
+    
+    [BoxGroup("Alter")]
+    public bool inAlter;
+    [BoxGroup("Alter")]
+    public List<AlterSlot> alterSlots;
+    [BoxGroup("Alter")]
+    public InventorySlot outputSlot;
+    [BoxGroup("Alter")]
+    public GameObject alterSlotsObject;
+    [BoxGroup("Alter")]
+    public Sprite alterBackground;
+    [BoxGroup("Alter")]
+    public AlterInteractable lastOpenedAlter;
+    [BoxGroup("Alter")]
+    public bool isAlterClosed;
+    [BoxGroup("Alter")]
+    public SpellRuneDatabase spellRuneRecipeDatabase;
 
     [BoxGroup("Slots")]
     public List<InventorySlot> inventorySlots;
@@ -46,17 +63,134 @@ public class Inventory : MonoBehaviour
             InputManager.instance.inventory = false;
 
             inChest = false;
+            inAlter = false;
             MenuManager.instance.ChangeMenuWithPause(inventoryMenu);
         }
 
         if(inChest){
-            background.sprite = chestBackground;
+            ChangeBackground(chestBackground);
             chestSlotsUI.SetActive(true);
             armourSlots.SetActive(false);
         }else{
-            background.sprite = inventoryBackground;
+            ChangeBackground(inventoryBackground);
             chestSlotsUI.SetActive(false);
             armourSlots.SetActive(true);
+        }
+
+        if(inAlter){
+            ChangeBackground(alterBackground);
+            alterSlotsObject.SetActive(true);
+            chestSlotsUI.SetActive(false);
+            armourSlots.SetActive(false);
+        }else{
+            if(!isAlterClosed && lastOpenedAlter != null){
+                
+                ChangeBackground(inventoryBackground);
+                alterSlotsObject.SetActive(false);
+                chestSlotsUI.SetActive(false);
+                armourSlots.SetActive(true);
+
+                for (int i = 0; i < alterSlots.Count; i++)
+                {
+                    for (int a = 0; a < lastOpenedAlter.alterItems.Count; a++)
+                    {
+                        if(alterSlots[i].slotPlace == lastOpenedAlter.alterItems[a].slotPlace){
+                            lastOpenedAlter.alterItems[a].item = alterSlots[i].slot.currentItem;
+                        }                
+                    }
+                }
+                
+                inAlter = false;
+                isAlterClosed = true;
+                lastOpenedAlter = null;
+            }
+        }
+    }
+
+    public void ChangeBackground(Sprite backgroundSprite)
+    {
+        background.sprite = backgroundSprite;
+    }
+    
+#region Containers
+    public void OpenAlter(List<AlterItem> alterItems, AlterInteractable alterInteractable)
+    {
+        for (int i = 0; i < alterSlots.Count; i++)
+        {
+            alterSlots[i].slot.alterFrom = alterInteractable;
+            for (int a = 0; a < alterItems.Count; a++)
+            {
+                if(alterSlots[i].slotPlace == alterItems[a].slotPlace){
+                    alterSlots[i].slot.currentItem = alterItems[a].item;
+                }                
+            }
+        }
+
+        ItemDrag.instance.SetAlterFrom(alterInteractable);
+        lastOpenedAlter = alterInteractable;
+        isAlterClosed = false;
+    }
+
+    public void CheckAlterRecipe()
+    {
+        for (int i = 0; i < spellRuneRecipeDatabase.recipiesInDatabase.Count; i++)
+        {
+            bool top = false;
+            bool bottom = false;
+            bool left = false;
+            bool right = false;
+            for (int a = 0; a < alterSlots.Count; a++)
+            {
+                if(!top){
+                    if(alterSlots[a].slotPlace == AlterSlotPlace.top){
+                        if(alterSlots[a].slot.currentItem.item == spellRuneRecipeDatabase.recipiesInDatabase[i].topItem){
+                            top = true;
+                        }
+                    }
+                }
+
+                if(!bottom){
+                    if(alterSlots[a].slotPlace == AlterSlotPlace.bottom){
+                        if(alterSlots[a].slot.currentItem.item == spellRuneRecipeDatabase.recipiesInDatabase[i].bottomItem){
+                            bottom = true;
+                        }
+                    }
+                }
+
+                if(!left){
+                    if(alterSlots[a].slotPlace == AlterSlotPlace.left){
+                        if(alterSlots[a].slot.currentItem.item == spellRuneRecipeDatabase.recipiesInDatabase[i].leftItem){
+                            left = true;
+                        }
+                    }
+                }
+
+                if(!right){
+                    if(alterSlots[a].slotPlace == AlterSlotPlace.right){
+                        if(alterSlots[a].slot.currentItem.item == spellRuneRecipeDatabase.recipiesInDatabase[i].rightItem){
+                            right = true;
+                        }
+                    }
+                }
+            }
+
+            if(top && bottom && left && right){
+                outputSlot.currentItem.amount = 1;
+                outputSlot.currentItem.item = spellRuneRecipeDatabase.recipiesInDatabase[i].outputItem;
+                
+                top = false;
+                bottom = false;
+                left = false;
+                right = false;
+            }else{
+                for (int a = 0; a < alterSlots.Count; a++)
+                {
+                    if(alterSlots[a].slotPlace == AlterSlotPlace.output){
+                        alterSlots[a].slot.currentItem = null;
+                        alterSlots[a].slot.UpdateItem();
+                    }
+                }
+            }
         }
     }
 
@@ -73,7 +207,7 @@ public class Inventory : MonoBehaviour
             chestSlots[i].UpdateItem();
         }
     }
-
+#endregion
     [Button]
     public void TestAdd(ItemObject item, int amount)
     {

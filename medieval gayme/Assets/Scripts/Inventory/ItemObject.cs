@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 [CreateAssetMenu(menuName = "Items/ItemObject")]
 public class ItemObject : ScriptableObject
@@ -39,4 +40,13 @@ public class ItemObject : ScriptableObject
     [BoxGroup("Weapon Info")][ShowIf("itemType", EItemType.weapon)]
     public float baseRange;
 #endregion
+
+    [Button]
+    public void SetStuff()
+    {
+        string n = name;
+        string parsed = n.Split('_')[1];
+
+        itemName = parsed;
+    }
 }

@@ -1,20 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EntityManager : MonoBehaviour
 {
-    public EntityHealthManager healthManager;
+    [BoxGroup("References")]
+    public NPCObject npcObject;
+    [BoxGroup("References")]
+    public GameObject playerObject;
+    [BoxGroup("References")]
+    public SphereCollider sphereCollider;
+    [BoxGroup("References/Scripts")]
+    public EntityHealthManager entityHealthManager;
+    [BoxGroup("References/Scripts")]
     public EntityAIManager entityAIManager;
+    [BoxGroup("References/Scripts")]
     public EntityCombatManager entityCombatManager;
+
+
+
+    [BoxGroup("UI")]
+    public TMP_Text nameText;
+
+    public void Awake()
+    {
+        sphereCollider.radius = npcObject.chaseRange;
+        playerObject = FindObjectOfType<PlayerMovement>().gameObject;
+        entityHealthManager.maxHealth = Random.Range(npcObject.minHealth, npcObject.maxHealth);
+    }
+
+    void Start() {
+        nameText.text = npcObject.npcName;
+    }
 
     public void GetSpellEffects(SpellUsage spellUsage)
     {            
         if(spellUsage.isHealing){
-            healthManager.HealthChange(5 * spellUsage.amplifyModifier, false);
+            entityHealthManager.HealthChange(5 * spellUsage.amplifyModifier, false);
         }
         if(spellUsage.isDamage){
-            healthManager.HealthChange(5 * spellUsage.amplifyModifier, true);
+            entityHealthManager.HealthChange(5 * spellUsage.amplifyModifier, true);
         }
         if(spellUsage.isQuickening){
             entityAIManager.speedMult = entityAIManager.speed * 2 * spellUsage.amplifyModifier;
@@ -40,5 +68,26 @@ public class EntityManager : MonoBehaviour
         if(spellUsage.isWeakening){
             entityCombatManager.attackModifier = 0.5f * spellUsage.amplifyModifier;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player"){
+            entityCombatManager.currentTarget = playerObject.transform;
+        }    
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player"){
+            entityCombatManager.currentTarget = null;
+        }    
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, npcObject.chaseRange);
+        Gizmos.color = Color.red;    
+        
+        Gizmos.DrawWireSphere(transform.position, npcObject.patrolRadius);
+        Gizmos.color = Color.green;    
     }
 }

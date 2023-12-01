@@ -5,16 +5,21 @@ using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.AI;
 public class SpellBook : MonoBehaviour
 {
     public static SpellBook instance;
 
     [BoxGroup("Saving")]
     public string spellSavePath;
-
     [BoxGroup("Saving")]
     public SpellSaveData spellSaveData = new SpellSaveData();
     SpellEffect saveIconSpell;
+
+    [BoxGroup("Audio")]
+    public SoundClip openClip;
+    [BoxGroup("Audio")]
+    public SoundClip closeClip;
 
     [BoxGroup("References")]
     public MenuManager menuManager;
@@ -107,12 +112,20 @@ public class SpellBook : MonoBehaviour
             InputManager.instance.spellBook = false;
 
             menuManager.ChangeMenuWithPause(spellBookMenu);
+            if(spellBookMenu.open)
+            {                
+                AudioManager.instance.PlaySFX(openClip);
+            }else{
+                AudioManager.instance.PlaySFX(closeClip);
+            }
         }    
     }
 
     public void UnlockSpellEffect(SpellEffect effect)
     {
-        unlockedEffects.Add(effect);
+        if(!unlockedEffects.Contains(effect)){
+            unlockedEffects.Add(effect);
+        }
 
         UpdateSpellBookUI();
     }
@@ -216,21 +229,16 @@ public class SpellBook : MonoBehaviour
                     UpdateSpellBookUI();
                 }
             }
-        }else{
-            print("One or less spell effect found");
         }
     }
 
     public void AddEffect(SpellEffect effect)
     {
-        print("Add Effect Called");
         if(canCreateSpell){
             if(selectedSpellEffects.Count < 5){
                 selectedSpellEffects.Add(effect);
             }
             spellSlots[selectedSpellEffects.Count - 1].effect = effect;
-        }else{
-            print("Cannot add effect");
         }
     }
 

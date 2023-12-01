@@ -59,7 +59,7 @@ public class Settings : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + 
-                    resolutions[i].height + " @ " + resolutions[i].refreshRateRatio;
+                    resolutions[i].height + " @ " + Mathf.RoundToInt(resolutions[i].refreshRateRatio.numerator);
             options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width 
                 && resolutions[i].height == Screen.currentResolution.height)

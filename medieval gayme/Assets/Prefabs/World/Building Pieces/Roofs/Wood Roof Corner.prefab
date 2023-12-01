@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6223772949520260474}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wood Roof Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1738243386121130613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -47.513016, y: 5.00453, z: -64.71848}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 1477044584826586839}
   - component: {fileID: 575416153481109198}
   - component: {fileID: 8643755711891258052}
-  - component: {fileID: 5979733669873984797}
-  m_Layer: 0
+  - component: {fileID: 5725651086667178750}
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9127961420444832332}
-  m_Mesh: {fileID: -2432090755550338912, guid: 1351fa2f5d1072448a961321cdfcf355, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: a945ca9cd1c94b947a87094321c4a2eb, type: 3}
 --- !u!23 &8643755711891258052
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5979733669873984797
+--- !u!64 &5725651086667178750
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,4 +137,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 1351fa2f5d1072448a961321cdfcf355, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: a945ca9cd1c94b947a87094321c4a2eb, type: 3}

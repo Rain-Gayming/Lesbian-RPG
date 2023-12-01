@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using JetBrains.Annotations;
 using Sirenix.Serialization;
+using Unity.Mathematics;
 
 public class EntityHealthManager : MonoBehaviour
 {    
@@ -14,12 +15,31 @@ public class EntityHealthManager : MonoBehaviour
     public float maxHealth;
     [BoxGroup("Health")]
     public float currentHealth;
+    [BoxGroup("Health/Regen")]
+    public float healthRegenAmount = 1;
+    [BoxGroup("Health/Regen")]
+    public float healthRegenTime = 1;
+    [BoxGroup("Health/Regen")]
+    public float healthRegenTimer;
 
     private void Start() {
+        maxHealth = Mathf.RoundToInt(maxHealth);
         currentHealth = maxHealth;
         
         if(healthDisplay){
             healthDisplay.UpdateDisplay();
+        }
+    }
+
+    public void Update()
+    {
+        if(currentHealth < maxHealth){
+            healthRegenTimer -= Time.deltaTime;
+
+            if(healthRegenTimer <= 0){
+                HealthChange(healthRegenAmount, false);
+                healthRegenTimer = healthRegenTime;
+            }
         }
     }
 
@@ -28,19 +48,19 @@ public class EntityHealthManager : MonoBehaviour
     {
         if(damage){
             currentHealth -= change;
+            healthRegenTimer = healthRegenTime;
         }else{
             currentHealth += change;
-        }
-
-        if(healthDisplay){
-            healthDisplay.UpdateDisplay();
         }
 
         if(currentHealth <= 0){
             Die();
         }
-        if(currentHealth >= maxHealth){
-            currentHealth = maxHealth;
+
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
+        if(healthDisplay){
+            healthDisplay.UpdateDisplay();
         }
     }
 

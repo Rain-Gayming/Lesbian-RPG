@@ -334,7 +334,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ReverseArrangement: 1
 --- !u!114 &75901230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &233645169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -966,7 +966,7 @@ PrefabInstance:
     - target: {fileID: 6549702014746513203, guid: 241fc2483f35f0a4f987697bf0be73dd,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[2].m_Text
-      value: High
+      value: Fullscreen
       objectReference: {fileID: 0}
     - target: {fileID: 6549702014746513203, guid: 241fc2483f35f0a4f987697bf0be73dd,
         type: 3}
@@ -3540,7 +3540,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519894804411658756, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519894804411658756, guid: fa43983f120a61447b61654109fd1360,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519894804411658756, guid: fa43983f120a61447b61654109fd1360,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3301215899168609437, guid: fa43983f120a61447b61654109fd1360,
@@ -3551,7 +3561,7 @@ PrefabInstance:
     - target: {fileID: 3723650607208150503, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3723650607208150503, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
@@ -3571,7 +3581,7 @@ PrefabInstance:
     - target: {fileID: 4882094050293710482, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4882094050293710482, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
@@ -3601,7 +3611,7 @@ PrefabInstance:
     - target: {fileID: 6859373576046486142, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -7.9716
+      value: 16.3965
       objectReference: {fileID: 0}
     - target: {fileID: 6859373576046486142, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
@@ -3611,7 +3621,7 @@ PrefabInstance:
     - target: {fileID: 6859373576046486142, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.037094116
+      value: 12.2211
       objectReference: {fileID: 0}
     - target: {fileID: 6859373576046486142, guid: fa43983f120a61447b61654109fd1360,
         type: 3}
@@ -6511,7 +6521,7 @@ PrefabInstance:
     - target: {fileID: 6549702014746513203, guid: 241fc2483f35f0a4f987697bf0be73dd,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateFullscreen
+      value: SetResolution
       objectReference: {fileID: 0}
     - target: {fileID: 6549702014746513203, guid: 241fc2483f35f0a4f987697bf0be73dd,
         type: 3}
@@ -6938,7 +6948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1667521700
 RectTransform:
   m_ObjectHideFlags: 0

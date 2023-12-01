@@ -23,6 +23,8 @@ public class MainMenuManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    
     public void Update()
     {
         if(PlayerManager.instance){

@@ -69,15 +69,18 @@ public class PlayerCameraManager : MonoBehaviour
     public void Start()
     {
         currentPos = new Vector3(camPosX, camPosY, camPosZ);    
+        InteractionCamera.instance.interactRange = InteractionCamera.instance.baseInteractionRange + currentZoom;
     }
 
     void Update() 
     {
         if(Input.mouseScrollDelta.y < 0){
             currentZoom -= zoomSpeed * Time.deltaTime;
+            InteractionCamera.instance.interactRange = InteractionCamera.instance.baseInteractionRange + currentZoom; 
         }
         if(Input.mouseScrollDelta.y > 0){
             currentZoom += zoomSpeed * Time.deltaTime;
+            InteractionCamera.instance.interactRange = InteractionCamera.instance.baseInteractionRange + currentZoom; 
         }
         if(currentZoom >= zoomMax){
             currentZoom = zoomMax;

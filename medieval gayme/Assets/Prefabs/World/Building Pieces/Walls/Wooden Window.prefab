@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2864666033640782536}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wooden Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1122698176922539940}
   - component: {fileID: 7522890007102506312}
   - component: {fileID: 4150422275192861817}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

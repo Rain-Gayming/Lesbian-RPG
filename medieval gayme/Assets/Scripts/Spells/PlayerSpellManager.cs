@@ -19,6 +19,11 @@ public class PlayerSpellManager : MonoBehaviour
     [BoxGroup("References/Player")]    
     public PlayerEquipmentManager playerEquipmentManager;
 
+    [BoxGroup("Audio")]
+    public SoundClip selfClip;
+    [BoxGroup("Audio")]
+    public SoundClip rangedClip;
+
     [BoxGroup("UI")]
     public Slider manaBarSlider;
 
@@ -27,6 +32,8 @@ public class PlayerSpellManager : MonoBehaviour
     public Spell currentSpell;
     [BoxGroup("Spells")]
     public SpellUsage spellUsage;
+    [BoxGroup("Spell Casting")]
+    public GameObject spellAOEArea;
     [BoxGroup("Spell Casting")]
     public GameObject spellProjectile;
     [BoxGroup("Spell Casting")]
@@ -147,6 +154,7 @@ public class PlayerSpellManager : MonoBehaviour
         {
             case "Self":
                 StartCoroutine(SpellAnimationCo("Self"));
+                AudioManager.instance.PlaySFX(selfClip);
             break;    
             case "Ranged":
                 StartCoroutine(SpellAnimationCo("Ranged"));
@@ -154,6 +162,7 @@ public class PlayerSpellManager : MonoBehaviour
                 newSpellProjectile.transform.position = spellSpawnPoint.position;
                 newSpellProjectile.GetComponent<SpellProjectile>().spellUsage = spellUsage;
                 playerMovement.SetRotation();
+                AudioManager.instance.PlaySFX(rangedClip);
             break; 
             case "Target":
                 //Do target stuff
@@ -215,6 +224,13 @@ public class PlayerSpellManager : MonoBehaviour
             if(spellUsage.isWeakening){
                 playerEquipmentManager.attackModifier = 0.5f * spellUsage.amplifyModifier;
             }  
+            if(spellUsage.aoeModifier > 0){
+                spellAOEArea.SetActive(true);
+                spellAOEArea.GetComponent<SphereCollider>().radius = 2 * spellUsage.amplifyModifier;
+                spellAOEArea.GetComponent<SpellAOE>().spellUsage = spellUsage;
+            }else{
+                spellAOEArea.SetActive(false);
+            }
         }
 
         playerMovement.playerAnim.SetBool("isSelfSpell", false);

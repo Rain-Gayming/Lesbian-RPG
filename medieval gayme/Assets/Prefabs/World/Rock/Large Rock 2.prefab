@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6675219456577043409}
   - component: {fileID: 7950553866122662160}
   - component: {fileID: 2605421694014978337}
-  m_Layer: 0
+  - component: {fileID: 292723594455297194}
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +84,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &292723594455297194
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6095415867943696258}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.855, y: 1.25, z: 1.06}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.1, y: 1.25, z: 0.3}
+  m_TimeToStationary: 0.5
 --- !u!1 &6282436430710373064
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +112,8 @@ GameObject:
   - component: {fileID: 3713120505895131015}
   - component: {fileID: 8462026259366314201}
   - component: {fileID: 3403653237321132383}
-  m_Layer: 0
+  - component: {fileID: 9039088973347341266}
+  m_Layer: 3
   m_Name: Large Rock 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,3 +199,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2334557, y: 0.59551954, z: 1.5515366}
   m_Center: {x: 0.6994457, y: 1.6198871, z: -0.27576828}
+--- !u!208 &9039088973347341266
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282436430710373064}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9109743852258130682}
   - component: {fileID: 8450441076675471895}
   - component: {fileID: 5862781401768721737}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7155404793711598836}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wooden Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

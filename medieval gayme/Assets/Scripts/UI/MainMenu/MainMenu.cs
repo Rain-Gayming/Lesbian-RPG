@@ -32,9 +32,7 @@ public class MainMenu : MonoBehaviour
             string result = paths[7];
 
             newButton.GetComponent<LoadCharacterButton>().characterName = result;
-            newButton.transform.localScale = Vector3.one;
-
-            print(result);
+            newButton.transform.localScale = Vector3.one; 
         }
     }
 
@@ -42,7 +40,7 @@ public class MainMenu : MonoBehaviour
     {
         if(nameInput.text != string.Empty){
             MainMenuManager.instance.playerName = nameInput.text;
-            SceneManager.LoadScene("World");
+            MainMenuManager.instance.LoadCharacter();
         }
     }
 

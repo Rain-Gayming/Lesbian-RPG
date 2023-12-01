@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5708568191243693725}
   - component: {fileID: 6601411046688450427}
   - component: {fileID: 7068403600515507983}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,8 @@ MonoBehaviour:
   interactPromptText: {fileID: 2776855727261396388}
   interactBillboard: {fileID: 1243352900474812654}
   nameBillboard: {fileID: 3010440846513534643}
+  lootPool: {fileID: 0}
+  hasBeenOpened: 0
   chestItems: []
 --- !u!65 &6601411046688450427
 BoxCollider:
@@ -108,7 +110,7 @@ GameObject:
   - component: {fileID: 4096302258691411831}
   - component: {fileID: 5209611803385451134}
   - component: {fileID: 4815836888317186913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,10 +200,40 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 235.05
       objectReference: {fileID: 0}
+    - target: {fileID: 1046799123891548004, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888439302290947862, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726300787704332930, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5265219722249742659, guid: b358c6d27bbaf10408aac5fdd8032e9b,
         type: 3}
       propertyPath: m_Name
       value: Interact UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265219722249742659, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769913118374479537, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791985441594125675, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6966274111667236642, guid: b358c6d27bbaf10408aac5fdd8032e9b,
         type: 3}
@@ -267,6 +299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911722023301252208, guid: b358c6d27bbaf10408aac5fdd8032e9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1844401646357334440, guid: b358c6d27bbaf10408aac5fdd8032e9b, type: 3}

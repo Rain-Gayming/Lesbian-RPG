@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3399937336267077514}
   - component: {fileID: 1826848178415913280}
   - component: {fileID: 3080024321047726815}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6246531294192398745}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ruined Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

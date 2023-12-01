@@ -54,6 +54,5 @@ public class SpellToolTip : ToolTip
         }
         effectsText.text = effects;
         manaText.text = "Mana: " + spellSlot.slotSpell.manaCost;
-        print(effects);
     }
 }

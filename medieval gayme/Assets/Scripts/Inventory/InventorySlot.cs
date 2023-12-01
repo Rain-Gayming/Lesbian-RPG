@@ -5,7 +5,8 @@ using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEditor.Rendering;
+    using UnityEditor.Rendering;
+    using UnityEngine.Rendering.Universal;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -20,11 +21,22 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool chestSlot;
     [BoxGroup("Chest")]
     public ChestInteractable chestFrom;
+    
+    [BoxGroup("Alter")]
+    public bool alterSlot;
+    [BoxGroup("Alter")]
+    public bool outputSlot;
+    [BoxGroup("Alter")]
+    public AlterInteractable alterFrom;
+    [BoxGroup("Alter")]
+    public AlterSlotPlace alterPlace;
 
     [BoxGroup("Hovering")]
     public bool hovered;
     [BoxGroup("Hovering")]
     public GameObject hoveredObject;
+    [BoxGroup("Hovering")]
+    public bool cantTakeItem;
     
     [BoxGroup("Items")]
     public bool hasRestriction;
@@ -47,6 +59,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 if(chestFrom){
                     ItemDrag.instance.SetChestFrom(chestFrom);
                 }
+                if(alterSlot){
+                    ItemDrag.instance.SetAlterFrom(alterFrom);
+                }
                 ItemDrag.instance.MouseClicked(chestSlot); 
             }
             if(InputManager.instance.dropItem && currentItem.item != null){
@@ -60,6 +75,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if(Input.GetMouseButtonDown(1) && currentItem.item != null){
                 UseItem();
             }
+        }
+
+        if(currentItem != preItem){
+            UpdateItem();
         }
     }
 
@@ -91,12 +110,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         hovered = false;
         hoveredObject.SetActive(false);
+        ItemDrag.instance.hoveredSlot = null;
     }
 
     [Button]
     public void UpdateItem()
-    {
-        QuestManager.instance.CheckQuestsForItems(currentItem.item, currentItem.amount);
+    {       
         if(currentItem.amount <= 1){
             amountText.gameObject.SetActive(false);
         }else{
@@ -110,17 +129,25 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             itemRarity.color = currentItem.item.itemRarity.rarityColour;
             itemIcon.sprite = currentItem.item.itemIcon;
-
-            if(currentItem.amount == 0 || !currentItem.item.canStack && currentItem.amount > 1){
-                currentItem.amount = 1;
-            }
         }else{
             itemRarity.gameObject.SetActive(false);
             itemIcon.gameObject.SetActive(false);
         }
         
+        if(currentItem.item != null){
+            QuestManager.instance.CheckQuestsForItems(currentItem.item, currentItem.amount);
+        }
+
+        if(alterSlot && !outputSlot){
+            Inventory.instance.CheckAlterRecipe();
+        }
+
         //Setting directly breaks it
-        InventoryItem ii = new InventoryItem(currentItem.item, currentItem.amount);
-        preItem = ii;
+        if(currentItem != null){
+            InventoryItem ii = new InventoryItem(currentItem.item, currentItem.amount);
+            preItem = ii;
+        }else{
+            print("Item is Null");
+        }
     }
 }

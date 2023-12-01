@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2446197601948175509}
   - component: {fileID: 4927502184534831290}
   - component: {fileID: 3382730960401976198}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mdoel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 642236732290930985}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ruined Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

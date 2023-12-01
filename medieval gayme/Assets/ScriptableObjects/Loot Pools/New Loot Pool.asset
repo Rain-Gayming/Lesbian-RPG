@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: New Loot Pool
   m_EditorClassIdentifier: 
   itemsInLootPool:
-  - item: {fileID: 11400000, guid: 2263f8075c0ee3b44b4ba63c5489d550, type: 2}
+  - item: {fileID: 11400000, guid: 8887c7304ccd58346a52e95ef028cd9d, type: 2}
     maxAmount: 1
     minAmount: 38
     dropChange: 100
-  - item: {fileID: 11400000, guid: 4e28265697fb17346958466e41ed6a09, type: 2}
+  - item: {fileID: 11400000, guid: 0f292c08e3cbbfd4c8f3727aa449eedf, type: 2}
     maxAmount: 1
     minAmount: 54
     dropChange: 100
-  - item: {fileID: 11400000, guid: 42eabf95b512e2f429ee902be94d8344, type: 2}
+  - item: {fileID: 11400000, guid: 2263f8075c0ee3b44b4ba63c5489d550, type: 2}
     maxAmount: 1
-    minAmount: 1
+    minAmount: 80
     dropChange: 100
-  - item: {fileID: 11400000, guid: 3e238a552e62bf340892268b3974d0df, type: 2}
+  - item: {fileID: 11400000, guid: d7a951ff82030264cae1a3bfe489351a, type: 2}
     maxAmount: 1
-    minAmount: 1
-    dropChange: 97
-  - item: {fileID: 11400000, guid: d79666902bae974499dfb0733c2d63af, type: 2}
+    minAmount: 80
+    dropChange: 100
+  - item: {fileID: 11400000, guid: 632d7cdda226fb649875dd9d59a7b0b3, type: 2}
     maxAmount: 1
-    minAmount: 1
-    dropChange: 0.001
-  minDrops: 1
+    minAmount: 80
+    dropChange: 100
+  minDrops: 5
   maxDrops: 5
