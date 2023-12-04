@@ -42,7 +42,7 @@ public class EntityAIManager : MonoBehaviour
         entityManager = GetComponent<EntityManager>();
         agent = GetComponent<NavMeshAgent>();
 
-        SetPoint();
+        SetPoint(Vector3.zero, null);
     }
 
     public void Jump()
@@ -71,7 +71,7 @@ public class EntityAIManager : MonoBehaviour
         }
         
         if(waitTimer <= 0 && waiting){
-            SetPoint();
+            SetPoint(Vector3.zero, null);
         }
     }   
 
@@ -88,10 +88,15 @@ public class EntityAIManager : MonoBehaviour
         return currentPoint.transform.position;
     } 
 
-    public void SetPoint()
+    public void SetPoint(Vector3 position, Transform trans)
     {     
-        FindPoint();
-
+        if(trans == null || position == Vector3.zero){
+            FindPoint();
+        }else{
+            if(trans){
+                currentPoint = trans.gameObject;
+            }
+        }
         waiting = false;
         
         float dist = Vector3.Distance(currentPoint.transform.position, entityManager.playerObject.transform.position);
@@ -101,7 +106,7 @@ public class EntityAIManager : MonoBehaviour
             agent.SetDestination(currentPoint.transform.position);
 
         }else{
-            SetPoint();
+            SetPoint(Vector3.zero, null);
         }
     }
 

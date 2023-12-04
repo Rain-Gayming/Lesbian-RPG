@@ -74,12 +74,15 @@ public class EntityManager : MonoBehaviour
     {
         if(other.tag == "Player"){
             entityCombatManager.currentTarget = playerObject.transform;
+            entityCombatManager.targetInRange = true;
         }    
     }
     void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player"){
             entityCombatManager.currentTarget = null;
+            entityCombatManager.targetInRange = false;
+            entityAIManager.SetPoint(Vector3.zero, null);
         }    
     }
     void OnDrawGizmosSelected()

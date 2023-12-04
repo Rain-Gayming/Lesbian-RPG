@@ -32,6 +32,30 @@ public class MenuManager : MonoBehaviour
             menu.Enable();
         }
     }
+    public void ChangeMenu(string menu)
+    {
+        if(!isTyping){
+            for (int i = 0; i < menus.Count; i++)
+            {
+                menus[i].Disable();
+            }
+            
+            for (int i = 0; i < menus.Count; i++)
+            {
+                if(menus[i].menuName == menu){
+                    menus[i].Enable();
+                }
+            }
+        }
+    }
+
+    public void CloseMenus()
+    {
+        for (int i = 0; i < menus.Count; i++)
+        {
+            menus[i].Disable();
+        }    
+    }
     public void ChangeMenuWithPause(Menu menu)
     {
         if(!isTyping){
@@ -52,7 +76,7 @@ public class MenuManager : MonoBehaviour
                 if(!storedMenuOpen)
                 {
                     menu.Enable();
-                    GameManager.instance.Pause();
+                    GameManager.instance.Pause(menu.menuName);
                     isInMenu = true;
                 }else{
                     menu.Disable();
@@ -65,4 +89,5 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
+    
 }

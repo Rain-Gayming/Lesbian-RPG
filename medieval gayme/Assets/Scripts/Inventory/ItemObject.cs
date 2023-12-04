@@ -22,7 +22,7 @@ public class ItemObject : ScriptableObject
     [BoxGroup("Equipment Info")][ShowIf("itemType", EItemType.equipment)]
     public EEquipmentType equipmentType;
     [BoxGroup("Equipment Info")][ShowIf("itemType", EItemType.equipment)]
-    public int armour;
+    public CStats statChanges;
     [BoxGroup("Equipment Info")][ShowIf("itemType", EItemType.equipment)][ShowIf("equipmentType", EEquipmentType.bags)]
     public int slots;
 #endregion

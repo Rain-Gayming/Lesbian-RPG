@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 
 public class EntityCombatManager : MonoBehaviour
 {
+    [BoxGroup("References")]
+    public EntityAIManager aiManager;
+
     [BoxGroup("Target")]
     public bool targetInRange;
     [BoxGroup("Target")]
@@ -12,4 +15,11 @@ public class EntityCombatManager : MonoBehaviour
 
     [BoxGroup("Stat Modifiers")]
     public float attackModifier;
+
+    public void Update()
+    {
+        if(targetInRange){
+            aiManager.SetPoint(currentTarget.position, currentTarget);
+        }
+    }
 }

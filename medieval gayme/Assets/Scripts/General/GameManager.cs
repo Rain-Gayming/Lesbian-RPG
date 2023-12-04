@@ -23,16 +23,28 @@ public class GameManager : MonoBehaviour
 
         if(InputManager.instance.pause){
             InputManager.instance.pause = false;
-            paused = !paused;
+            if(paused){
+                paused = false;
+                MenuManager.instance.CloseMenus();
+            }else{
+                paused = true;
+                MenuManager.instance.ChangeMenu("Pause");
+            }
         }
     }
 
-    public void Pause()
+    public void Pause(string menu)
     {
+        
+        if(menu == "Pause"){
+            MenuManager.instance.ChangeMenu("Pause");
+        }
+        
         paused = true;
     }
     public void Unpause()
     {
         paused = false;
+        MenuManager.instance.CloseMenus(); 
     }
 }

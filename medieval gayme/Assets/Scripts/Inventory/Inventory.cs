@@ -44,6 +44,8 @@ public class Inventory : MonoBehaviour
     public SpellRuneDatabase spellRuneRecipeDatabase;
 
     [BoxGroup("Slots")]
+    public List<InventoryItem> items;
+    [BoxGroup("Slots")]
     public List<InventorySlot> inventorySlots;
 
     [BoxGroup("Ground Item")]
@@ -52,6 +54,10 @@ public class Inventory : MonoBehaviour
     public Transform dropPoint;
      
     
+    void Awake() {
+        SetSlotPositions();
+    }
+
     public void Start()
     {
         instance = this;
@@ -254,6 +260,12 @@ public class Inventory : MonoBehaviour
     {
         slot.currentItem.amount += item.amount;
         slot.UpdateItem();
+        for (int i = 0; i < items.Count; i++)
+        {
+            if(items[i].item == item.item){
+                items[i].amount += item.amount;
+            }
+        }
         item = null;
     }
 
@@ -261,6 +273,7 @@ public class Inventory : MonoBehaviour
     {
         slot.currentItem = item;
         slot.UpdateItem();
+        items.Add(item);
         item = null;
     }
 
@@ -270,5 +283,14 @@ public class Inventory : MonoBehaviour
         newGround.transform.position = dropPoint.position;
 
         newGround.GetComponent<GroundItem>().item = item;
+    }
+
+    [Button]
+    public void SetSlotPositions()
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            inventorySlots[i].slotPos = i;
+        }
     }
 }

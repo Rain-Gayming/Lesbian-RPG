@@ -15,18 +15,18 @@ namespace InfinityCode.UltimateEditorEnhancer.EditorMenus.Actions
 
         protected override void Init()
         {
-            guiContent = new GUIContent(Icons.updateAvailable, "Update Available");
+            //guiContent = new GUIContent(Icons.updateAvailable, "Update Available");
         }
 
         public override void Invoke()
         {
-            Updater.OpenWindow();
+            //Updater.OpenWindow();
         }
 
         public bool Validate()
         {
-            Updater.CheckNewVersionAvailable();
-            return Updater.hasNewVersion;
+            //Updater.CheckNewVersionAvailable();
+            return false;
         }
     }
 }

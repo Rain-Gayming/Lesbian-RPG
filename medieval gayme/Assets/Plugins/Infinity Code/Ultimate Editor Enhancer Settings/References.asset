@@ -517,10 +517,14 @@ MonoBehaviour:
     icon: VideoPlayer Icon
     color: {r: 0.5764706, g: 0.43921572, b: 0.8588236, a: 1}
   _sceneHistory:
+  - name: MainMenu
+    path: Assets/Prefabs/Scenes/MainMenu.unity
   - name: World
-    path: Assets/Scenes/World.unity
+    path: Assets/Prefabs/Scenes/World.unity
   - name: MainMenu
     path: Assets/Scenes/MainMenu.unity
+  - name: World
+    path: Assets/Scenes/World.unity
   - name: SampleScene
     path: Assets/Scenes/SampleScene.unity
   _notes: []

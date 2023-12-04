@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -12,8 +14,28 @@ public class PlayerCamera : MonoBehaviour
     public float rotationLerp = 0.5f;
     public GameObject followTransform;
 
+    [BoxGroup("Settings")]
+    public float xSensitivity;
+    [BoxGroup("Settings")]
+    public float ySensitivity;
+    [BoxGroup("Settings")]
+    public bool invertedX;
+    [BoxGroup("Settings")]
+    public bool invertedY;
+    [BoxGroup("Settings")]
+
     void Awake() {
         instance = this;
+    }
+    void Start() {
+        UpdateCamera();
+
+        if(xSensitivity <= 0){
+            xSensitivity = 3;
+        }
+        if(ySensitivity <= 0){
+            ySensitivity = 3;
+        }
     }
 
     private void Update()
@@ -22,13 +44,22 @@ public class PlayerCamera : MonoBehaviour
             #region Follow Transform Rotation
 
             //Rotate the Follow Target transform based on the input
-            followTransform.transform.rotation *= Quaternion.AngleAxis(InputManager.instance.cameraLook.x * rotationPower * Time.deltaTime, Vector3.up);
+
+            if(!invertedX){
+                followTransform.transform.rotation *= Quaternion.AngleAxis(InputManager.instance.cameraLook.x * xSensitivity * Time.deltaTime, Vector3.up);
+            }else{
+                followTransform.transform.rotation *= Quaternion.AngleAxis(-InputManager.instance.cameraLook.x * xSensitivity * Time.deltaTime, Vector3.up);
+            }
 
             #endregion
 
             #region Vertical Rotation
-            followTransform.transform.rotation *= Quaternion.AngleAxis(InputManager.instance.cameraLook.y * rotationPower * Time.deltaTime, Vector3.right);
 
+            if(!invertedY){
+                followTransform.transform.rotation *= Quaternion.AngleAxis(InputManager.instance.cameraLook.y * ySensitivity * Time.deltaTime, Vector3.right);
+            }else{
+                followTransform.transform.rotation *= Quaternion.AngleAxis(-InputManager.instance.cameraLook.y * ySensitivity * Time.deltaTime, Vector3.right);
+            }
             var angles = followTransform.transform.localEulerAngles;
 
             //Clamp the Up/Down rotation
@@ -41,5 +72,14 @@ public class PlayerCamera : MonoBehaviour
             nextRotation = Quaternion.Lerp(followTransform.transform.rotation, nextRotation, 0);
             followTransform.transform.localEulerAngles = new Vector3(angles.x, angles.y, 0);  
         }
+    }
+
+    public void UpdateCamera()
+    {
+        xSensitivity = Settings.instance.saveData.gameplaySaveData.sensitivityX;
+        ySensitivity = Settings.instance.saveData.gameplaySaveData.sensitivityY;
+        
+        invertedX = Settings.instance.saveData.gameplaySaveData.invertedX;
+        invertedY = Settings.instance.saveData.gameplaySaveData.invertedY;
     }
 }

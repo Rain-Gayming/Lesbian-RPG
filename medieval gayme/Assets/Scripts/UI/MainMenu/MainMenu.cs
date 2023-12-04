@@ -6,6 +6,13 @@ using Sirenix.OdinInspector;
 using TMPro;
 using System.IO;
 
+public enum SocialMedia
+{
+    itch,
+    x,
+    discord,
+}
+
 public class MainMenu : MonoBehaviour
 {
     public string[] paths;
@@ -17,6 +24,13 @@ public class MainMenu : MonoBehaviour
     public GameObject characterButtonPrefab;    
     [BoxGroup("Load Character")]
     public Transform characterButtonPoint;
+
+    [BoxGroup("Media Links")]
+    public string discordLink;
+    [BoxGroup("Media Links")]
+    public string xLink;
+    [BoxGroup("Media Links")]
+    public string itchLink;
     
     public void Start()
     {
@@ -47,5 +61,18 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenItch()
+    {
+        Application.OpenURL(itchLink);
+    }
+    public void OpenDiscord()
+    {
+        Application.OpenURL(discordLink);
+    }
+    public void OpenX()
+    {
+        Application.OpenURL(xLink);
     }
 }

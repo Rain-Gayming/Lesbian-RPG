@@ -11,7 +11,15 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
     public PlayerSaveData playerSaveData;
     public string playerSavePath;   
+    [BoxGroup("Refernces")]
     public GameObject player;
+    [BoxGroup("Refernces")]
+    public InventorySaving inventorySave;
+
+    [BoxGroup("Saving")]
+    public float autoSaveTimer;
+    [BoxGroup("Saving")]
+    public float autoSaveTime = 300;
     
     public void Awake() 
     {        
@@ -20,6 +28,7 @@ public class SaveManager : MonoBehaviour
     
     public void Start()
     {
+        autoSaveTimer = autoSaveTime;
         playerSavePath = Application.persistentDataPath + "/"+ MainMenuManager.instance.playerName + 
             "_PlayerSaveData.json";
         
@@ -29,10 +38,21 @@ public class SaveManager : MonoBehaviour
     public void Save()
     {
         SpellBook.instance.SaveSpells();
+        inventorySave.SaveInventory();
         SavePlayer();
+    }
+
+    void Update()
+    {
+        autoSaveTimer -= Time.deltaTime;
+
+        if(autoSaveTime <= 0){
+            SavePlayer();
+        }    
     }
     public void SavePlayer()
     {
+        autoSaveTimer = autoSaveTime;
         playerSaveData.position = player.transform.position;
 
         string jsonString = JsonUtility.ToJson(playerSaveData, true);

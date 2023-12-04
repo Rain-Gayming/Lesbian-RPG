@@ -224,8 +224,6 @@ public class SpellBook : MonoBehaviour
                     canCreateSpell = true;    
                     inCreateMenu = false;
 
-                    SaveManager.instance.Save();
-
                     UpdateSpellBookUI();
                 }
             }

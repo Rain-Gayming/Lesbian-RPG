@@ -41,7 +41,7 @@ public class ItemToolTip : ToolTip
 
         // \n for new line
         if(item.itemType == EItemType.equipment){
-            itemStatsText.text = "+ " + item.armour.ToString() + " armour";
+            itemStatsText.text = "+ " + item.statChanges.defence    .ToString() + " armour";
             itemTypeText.text = "Equipment: " + item.equipmentType.ToString();
         }
         if(item.itemType == EItemType.weapon){

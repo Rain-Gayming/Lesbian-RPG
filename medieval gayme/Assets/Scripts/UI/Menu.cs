@@ -6,6 +6,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     public GameObject menu;
+    public string menuName;
     public bool open;
     public void Disable()
     {

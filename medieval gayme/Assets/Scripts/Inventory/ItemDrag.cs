@@ -128,6 +128,7 @@ public class ItemDrag : MonoBehaviour
             {
                 if(chestFrom.chestItems[i].item == storedFromItem.item){
                     chestFrom.chestItems.RemoveAt(i);
+                    Inventory.instance.items.Add(storedFromItem);
                 }
             }
             if(hoveredSlot.chestSlot){
@@ -142,6 +143,9 @@ public class ItemDrag : MonoBehaviour
                 if(alterFrom.alterItems[i].slotPlace == fromSlot.alterPlace){
                     InventoryItem ii = new InventoryItem(hoveredSlot.currentItem.item, hoveredSlot.currentItem.amount);
                     alterFrom.alterItems[i].item = ii;
+                    
+                    if(!hoveredSlot.alterFrom)
+                        Inventory.instance.items.Add(storedFromItem);
                 }
             }
         }

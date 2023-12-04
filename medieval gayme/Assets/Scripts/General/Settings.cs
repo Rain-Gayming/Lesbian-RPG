@@ -7,9 +7,15 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
+    public static Settings instance;
+    [BoxGroup("References")]
+    public PlayerCamera camera;
+    [BoxGroup("References")]
+    public PlayerCamera magicCamera;
     [BoxGroup("Menu")]
     public Menu settingsMenu;
     [BoxGroup("Menu")]
@@ -20,6 +26,8 @@ public class Settings : MonoBehaviour
     public string savePath;
     [BoxGroup("Settings/Saving")]
     public SettingsSaveData saveData;
+    [BoxGroup("Settings/Saving")]
+    public SettingsSaveData defaultSettings;
 
     [BoxGroup("Settings/Graphics")]
     public UniversalRenderPipelineAsset pipelineAsset;
@@ -47,6 +55,24 @@ public class Settings : MonoBehaviour
     public Slider effectsSlider;
     [BoxGroup("Settings/Audio")]
     public TMP_Text effectsText;
+    
+    [BoxGroup("Settings/Gameplay")]
+    public Slider sensXSlider;
+    [BoxGroup("Settings/Gameplay")]
+    public TMP_Text sensXText;
+    [BoxGroup("Settings/Gameplay")]
+    public Slider sensYSlider;
+    [BoxGroup("Settings/Gameplay")]
+    public TMP_Text sensYText;
+    [BoxGroup("Settings/Gameplay")]
+    public Toggle invertXToggle;
+    [BoxGroup("Settings/Gameplay")]
+    public Toggle invertYToggle;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     void Start() 
     {        
@@ -69,8 +95,10 @@ public class Settings : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         //LoadSettings(currentResolutionIndex);
 
-        if(File.Exists(savePath)){
+        if(File.Exists(savePath) && SceneManager.GetActiveScene().name == "MainMenu"){
             StartCoroutine(LoadCo());
+        }else{ 
+            LoadDefaults();
         }
     }
 
@@ -95,6 +123,47 @@ public class Settings : MonoBehaviour
         effectsText.text = "Effects: " + (vol + 80).ToString();
         saveData.audioSaveData.effectsVolume = vol;
         SaveSettings();
+    }
+
+    public void UpdateSensX(float val)
+    {
+        saveData.gameplaySaveData.sensitivityX = val;
+        sensXText.text = "X Sensitivity: " + val;
+        
+        SaveSettings();
+    }
+    public void UpdateSensY(float val)
+    {        
+        saveData.gameplaySaveData.sensitivityY = val;
+        sensYText.text = "Y Sensitivity: " + val;
+
+        SaveSettings();
+    }
+
+    public void UpdateInvertX(bool val)
+    {
+        saveData.gameplaySaveData.invertedX = val;
+
+        SaveSettings();
+    }
+    
+    public void UpdateInvertY(bool val)
+    {
+        saveData.gameplaySaveData.invertedY = val;
+
+        SaveSettings();
+    }
+
+    public void UpdateCameraSettings()
+    {        
+        //please for gods sake ive been trying to get this to set values for a fucking hour im about to cry omfg
+        // why wont u work u bastard of a language
+        if(camera != null){
+            camera.UpdateCamera();
+        }
+        if(magicCamera != null){
+            magicCamera.UpdateCamera();
+        }
     }
 
     public void SetResolution(int value)
@@ -192,6 +261,7 @@ public class Settings : MonoBehaviour
 
     public IEnumerator LoadCo()
     {
+        print("loading");
         settingsObject.position = new Vector3(10000, 10000, 0);
         settingsMenu.Enable();
         LoadSettings();
@@ -221,6 +291,43 @@ public class Settings : MonoBehaviour
         UpdateMusic(musicSlider.value);
         effectsSlider.value = newSaveData.audioSaveData.effectsVolume;
         UpdateEffects(effectsSlider.value);
+
+        sensYSlider.value = newSaveData.gameplaySaveData.sensitivityY;
+        UpdateSensY(sensYSlider.value);
+        sensXSlider.value = newSaveData.gameplaySaveData.sensitivityX;
+        UpdateSensX(sensXSlider.value);
+        invertYToggle.isOn = newSaveData.gameplaySaveData.invertedY;
+        UpdateInvertY(invertYToggle.isOn);
+        invertXToggle.isOn = newSaveData.gameplaySaveData.invertedX;
+        UpdateInvertX(invertXToggle.isOn);
+    }
+
+    public void LoadDefaults()
+    {
+        fullscreendropDown.value = defaultSettings.graphicsSaveData.fullscreen;
+        UpdateFullscreen(fullscreendropDown.value);
+        shadowDropDown.value = defaultSettings.graphicsSaveData.shadowQuality;
+        UpdateShadows(shadowDropDown.value);
+        antiAliasingDropDown.value = defaultSettings.graphicsSaveData.antiAliasingQuality;
+        UpdateAntiAliasing(antiAliasingDropDown.value);
+        resolutionDropdown.value = defaultSettings.graphicsSaveData.resolution;
+        SetResolution(resolutionDropdown.value);
+        
+        masterSlider.value = defaultSettings.audioSaveData.masterVolume;
+        UpdateMaster(masterSlider.value);
+        musicSlider.value = defaultSettings.audioSaveData.musicVolume;
+        UpdateMusic(musicSlider.value);
+        effectsSlider.value = defaultSettings.audioSaveData.effectsVolume;
+        UpdateEffects(effectsSlider.value);
+
+        sensYSlider.value = defaultSettings.gameplaySaveData.sensitivityY;
+        UpdateSensY(sensYSlider.value);
+        sensXSlider.value = defaultSettings.gameplaySaveData.sensitivityX;
+        UpdateSensX(sensXSlider.value);
+        invertYToggle.isOn = defaultSettings.gameplaySaveData.invertedY;
+        UpdateInvertY(invertYToggle.isOn);
+        invertXToggle.isOn = defaultSettings.gameplaySaveData.invertedX;
+        UpdateInvertX(invertXToggle.isOn); 
     }
 }
 
@@ -250,6 +357,9 @@ public class AudioSaveData
 [System.Serializable]
 public class GameplaySaveData
 {
-
+    public bool invertedX;
+    public bool invertedY;
+    public float sensitivityX;
+    public float sensitivityY;
 }
 

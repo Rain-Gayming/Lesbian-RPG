@@ -39,6 +39,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool cantTakeItem;
     
     [BoxGroup("Items")]
+    public int slotPos;
+    [BoxGroup("Items")]
     public bool hasRestriction;
     [BoxGroup("Items")][ShowIf("hasRestriction")]
     public EItemType itemRestriction;
