@@ -41,6 +41,16 @@ public class ItemObject : ScriptableObject
     public float baseRange;
 #endregion
 
+#region Spell Info
+    [BoxGroup("Spell Info")][ShowIf("itemType", EItemType.spellItem)]
+    public string spellName;
+    [BoxGroup("Spell Info")][ShowIf("itemType", EItemType.spellItem)]
+    public List<SpellEffect> spellEffects;
+    [BoxGroup("Spell Info")][ShowIf("itemType", EItemType.spellItem)]
+    [PreviewField] public SpellEffect spellIcon;
+#endregion
+
+
     [Button]
     public void SetStuff()
     {

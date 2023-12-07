@@ -7,8 +7,10 @@ public enum EItemType
     equipment,
     questItem,
     spellEffect,
+    
+    spellItem,
     potion,
-    poison
+    poison,
 }
 
 public enum EWeaponType

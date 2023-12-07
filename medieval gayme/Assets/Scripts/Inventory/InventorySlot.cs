@@ -5,8 +5,6 @@ using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-    using UnityEditor.Rendering;
-    using UnityEngine.Rendering.Universal;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -96,6 +94,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             case EItemType.equipment:
                 PlayerEquipmentManager.instance.QuickEquip(this, currentItem);
                 UpdateItem();
+            break;
+            case EItemType.spellItem:
+                SpellBook.instance.CreateSpell(currentItem.item.spellEffects, currentItem.item.spellName, currentItem.item.spellIcon);
             break;
         }
     }

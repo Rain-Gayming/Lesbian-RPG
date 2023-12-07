@@ -225,6 +225,27 @@ public class SpellBook : MonoBehaviour
         }
     }
 
+    public void CreateSpell(List<SpellEffect> effects, string spellName, SpellEffect icon)
+    {    
+        float totalManaCost = 0;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            totalManaCost += effects[i].manaCost;
+        }
+
+        Spell createdSpell = new Spell(effects, spellName, icon, totalManaCost);
+        spells.Add(createdSpell);
+        GameObject newSpellSlot = Instantiate(spellSlotPrefab);
+        newSpellSlot.transform.SetParent(spellGrid);
+        newSpellSlot.transform.localScale = Vector3.one;   
+
+        newSpellSlot.GetComponent<SpellSlot>().slotSpell.iconEffect = iconSlot.effect;
+        newSpellSlot.GetComponent<SpellSlot>().isSpell = true;
+        newSpellSlot.GetComponent<SpellSlot>().slotSpell = createdSpell;
+        
+        UpdateSpellBookUI();
+    }
     public void AddEffect(SpellEffect effect)
     {
         if(canCreateSpell){

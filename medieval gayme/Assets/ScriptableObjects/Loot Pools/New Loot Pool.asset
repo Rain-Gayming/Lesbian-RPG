@@ -33,5 +33,9 @@ MonoBehaviour:
     maxAmount: 1
     minAmount: 80
     dropChange: 7.1
+  - item: {fileID: 11400000, guid: 6edad8fbb58a231428b3122f3b87e49b, type: 2}
+    maxAmount: 1
+    minAmount: 1
+    dropChange: 75
   minDrops: 1
   maxDrops: 5
