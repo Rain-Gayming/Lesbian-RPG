@@ -104,7 +104,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         hovered = true;
         hoveredObject.SetActive(true);
-        ItemSlotTooltipTrigger.instance.item = currentItem.item;
+        ItemSlotTooltipTrigger.instance.item = currentItem;
         ItemDrag.instance.hoveredSlot = this;
     }
 

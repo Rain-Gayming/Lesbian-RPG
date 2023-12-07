@@ -28,6 +28,9 @@ public class PlayerEquipmentManager : MonoBehaviour
     public InventorySlot ringSlot1;
     [BoxGroup("Equipment Slots/Rings")]
     public InventorySlot ringSlot2;
+    
+    [BoxGroup("Equipment Slots/Other")]
+    public InventorySlot backSlot;
 
     void Awake() {
         instance = this;
@@ -36,19 +39,36 @@ public class PlayerEquipmentManager : MonoBehaviour
     [Button]
     public void UpdateStats()
     {
-        defence = 0;
-#region Defence
-        defence += headSlot.currentItem.item ? headSlot.currentItem.item.statChanges.defence : 0;
-        defence += chestSlot.currentItem.item ? chestSlot.currentItem.item.statChanges.defence : 0;
-        defence += legsSlot.currentItem.item ? legsSlot.currentItem.item.statChanges.defence : 0;
-        defence += feetSlot.currentItem.item ? feetSlot.currentItem.item.statChanges.defence : 0;
+        int o = 0;
+        if(headSlot.currentItem.item)
+            statManager.CombineStats(headSlot.currentItem.item.statChanges);
+        else
+            o++;
+        if(chestSlot.currentItem.item)
+            statManager.CombineStats(chestSlot.currentItem.item.statChanges);
+        else
+            o++;
+        if(legsSlot.currentItem.item)
+            statManager.CombineStats(legsSlot.currentItem.item.statChanges);
+        else
+            o++;
+        if(feetSlot.currentItem.item)
+            statManager.CombineStats(feetSlot.currentItem.item.statChanges);
+        else
+            o++;
         
+        if(ringSlot1.currentItem.item)
+            statManager.CombineStats(ringSlot1.currentItem.item.statChanges);
+        else
+            o++;
+        if(ringSlot2.currentItem.item)
+            statManager.CombineStats(ringSlot2.currentItem.item.statChanges);
+        else
+            o++;
 
-        defence += ringSlot1.currentItem.item ? ringSlot1.currentItem.item.statChanges.defence : 0;
-        defence += ringSlot2.currentItem.item ? ringSlot2.currentItem.item.statChanges.defence : 0;
-#endregion
-
-        statManager.currentStats.defence = defence;
+        if(o >= 7){
+            statManager.currentStats = statManager.baseStats;
+        }
     }
 
     public void QuickEquip(InventorySlot slotFrom, InventoryItem item)
@@ -77,5 +97,7 @@ public class PlayerEquipmentManager : MonoBehaviour
                 feetSlot.UpdateItem();
             break;
         }
+
+        UpdateStats();
     }
 }

@@ -35,6 +35,9 @@ public class MenuManager : MonoBehaviour
     public void ChangeMenu(string menu)
     {
         if(!isTyping){
+            ToolTipSystem.instance.tooltip.gameObject.SetActive(false);
+            ToolTipSystem.instance.itemTooltip.gameObject.SetActive(false);
+            ToolTipSystem.instance.spellToolTip.gameObject.SetActive(false);
             for (int i = 0; i < menus.Count; i++)
             {
                 menus[i].Disable();

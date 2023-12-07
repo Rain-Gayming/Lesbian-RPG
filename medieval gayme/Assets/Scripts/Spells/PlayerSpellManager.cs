@@ -157,6 +157,7 @@ public class PlayerSpellManager : MonoBehaviour
                 AudioManager.instance.PlaySFX(selfClip);
             break;    
             case "Ranged":
+                print("Casting Range");
                 StartCoroutine(SpellAnimationCo("Ranged"));
                 GameObject newSpellProjectile = Instantiate(spellProjectile);
                 newSpellProjectile.transform.position = spellSpawnPoint.position;

@@ -95,12 +95,7 @@ public class SpellBook : MonoBehaviour
     {
         spellBookMenu.menu = spellBookUI;
 
-        spellSavePath = Application.persistentDataPath + "/" + MainMenuManager.instance.playerName + 
-            "_SpellSaveData.json";
-            
-        if(File.Exists(spellSavePath)){
-            LoadSpells();
-        }
+        spellSavePath = Application.persistentDataPath + "/" + MainMenuManager.instance.playerName + "_SpellSaveData.json";
         spellBookMenu.Enable();    
         UpdateSpellBookUI();
         spellBookMenu.Disable();
@@ -290,7 +285,11 @@ public class SpellBook : MonoBehaviour
 
     [Button]
     public void LoadSpells()
-    {
+    {   
+        if(!File.Exists(spellSavePath)){
+            spellSavePath = Application.persistentDataPath + "/" + MainMenuManager.instance.playerName + "_SpellSaveData.json";
+            return;
+        }    
         string fileContents = File.ReadAllText(spellSavePath);
 
         SpellSaveData newSaveData = JsonUtility.FromJson<SpellSaveData>(fileContents);

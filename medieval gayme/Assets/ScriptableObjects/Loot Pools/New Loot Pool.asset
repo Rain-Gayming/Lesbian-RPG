@@ -16,22 +16,22 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 8887c7304ccd58346a52e95ef028cd9d, type: 2}
     maxAmount: 1
     minAmount: 38
-    dropChange: 100
+    dropChange: 68.5
   - item: {fileID: 11400000, guid: 0f292c08e3cbbfd4c8f3727aa449eedf, type: 2}
     maxAmount: 1
     minAmount: 54
-    dropChange: 100
+    dropChange: 28.8
   - item: {fileID: 11400000, guid: 2263f8075c0ee3b44b4ba63c5489d550, type: 2}
     maxAmount: 1
     minAmount: 80
-    dropChange: 100
+    dropChange: 5.6
   - item: {fileID: 11400000, guid: d7a951ff82030264cae1a3bfe489351a, type: 2}
     maxAmount: 1
     minAmount: 80
-    dropChange: 100
+    dropChange: 55.1
   - item: {fileID: 11400000, guid: 632d7cdda226fb649875dd9d59a7b0b3, type: 2}
     maxAmount: 1
     minAmount: 80
-    dropChange: 100
-  minDrops: 5
+    dropChange: 7.1
+  minDrops: 1
   maxDrops: 5

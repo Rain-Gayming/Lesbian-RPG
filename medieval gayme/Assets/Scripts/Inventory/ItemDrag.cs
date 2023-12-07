@@ -166,6 +166,8 @@ public class ItemDrag : MonoBehaviour
         fromSlot.currentItem = hoveredSlot.currentItem;
         hoveredSlot.currentItem = storedFromItem;
 
+        PlayerEquipmentManager.instance.UpdateStats();
+
         chestFrom = null;
         fromSlot = null;
         hoveredSlot = null;

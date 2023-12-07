@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7084408970093385360}
-  - component: {fileID: 5708568191243693725}
+  - component: {fileID: 1264700074313668050}
   - component: {fileID: 6601411046688450427}
   - component: {fileID: 7068403600515507983}
   m_Layer: 3
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 7764033252826916752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5708568191243693725
+--- !u!114 &1264700074313668050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3669202839524249268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766b7bdb887dbfa4b90ab5dcab67a7cc, type: 3}
+  m_Script: {fileID: 11500000, guid: be8f3c4b3ffe52d4b9ce21ba8c5fb24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnUse: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   interactBillboard: {fileID: 1243352900474812654}
   nameBillboard: {fileID: 3010440846513534643}
   lootPool: {fileID: 0}
+  chestName: 
   hasBeenOpened: 0
   chestItems: []
 --- !u!65 &6601411046688450427

@@ -10,7 +10,7 @@ public class ItemSlotTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
     public static ItemSlotTooltipTrigger instance;
 
     [BoxGroup("Item")]
-    public ItemObject item;
+    public InventoryItem item;
 
     [BoxGroup("Tooltip")]
     public string content;
@@ -25,7 +25,7 @@ public class ItemSlotTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(ItemDrag.instance.hoveredSlot.currentItem.item != null){
-            item = ItemDrag.instance.hoveredSlot.currentItem.item;
+            item = ItemDrag.instance.hoveredSlot.currentItem;
             ToolTipSystem.ShowItemTooltip(content, header, item);
         }
     }

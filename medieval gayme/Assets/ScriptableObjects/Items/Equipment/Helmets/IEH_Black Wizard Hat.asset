@@ -16,9 +16,35 @@ MonoBehaviour:
   itemRarity: {fileID: 11400000, guid: 86f3138c85e43ae42b763497052e61d2, type: 2}
   itemIcon: {fileID: 0}
   canStack: 0
-  itemType: 0
+  itemType: 4
   equipmentType: 0
-  armour: 0
+  statChanges:
+    maxHealth: 1
+    maxMana: 15
+    maxStamina: 1
+    defence: 3
+    strength: 1
+    dexterity: 0
+    intelligence: 5
+    constitution: 0
+    minorStats:
+      strengthStats:
+        longWeapons: 0
+        shortWeapons: 0
+        heavyArmour: 0
+        mediumArmour: 0
+      dexterityStats:
+        speed: 0
+        athletics: 0
+        agility: 0
+        lightArmour: 0
+      intelligenceStats:
+        enchanting: 3
+        alchemy: 0
+        spellPower: 10
+      constitutionStats:
+        illnessResistence: 0
+        swimming: 0
   slots: 0
   spellEffectToUnlock: {fileID: 0}
   weaponType: 0

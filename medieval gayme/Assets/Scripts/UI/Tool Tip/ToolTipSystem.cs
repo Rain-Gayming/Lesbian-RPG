@@ -14,7 +14,7 @@ public class ToolTipSystem : MonoBehaviour
         instance = this;
     }
 
-    public static void ShowItemTooltip(string content, string header, ItemObject item)
+    public static void ShowItemTooltip(string content, string header, InventoryItem item)
     {
         instance.itemTooltip.gameObject.SetActive(true);
         instance.itemTooltip.SetText(content, header);

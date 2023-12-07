@@ -16,14 +16,19 @@ public class NPCObject : ScriptableObject
     [BoxGroup("NPC Stats")]
     public float maxHealth;
     
-    [BoxGroup("NPC Patrolling")]
+    [BoxGroup("NPC Enemy")]
     public float patrolRadius;
+    [BoxGroup("NPC Enemy")]
+    public float alertRadius;
     
     [BoxGroup("NPC Aggression")]
     public Aggression aggressionLevel;
     [BoxGroup("NPC Aggression/Aggressive")]
     [ShowIf("aggressionLevel", Aggression.aggressive)]
     public float chaseRange;
+    [BoxGroup("NPC Aggression/Aggressive")]
+    [ShowIf("aggressionLevel", Aggression.aggressive)]
+    public float attackRange;
 }
 
 public enum Aggression

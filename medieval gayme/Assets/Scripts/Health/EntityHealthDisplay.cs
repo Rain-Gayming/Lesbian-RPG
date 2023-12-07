@@ -12,11 +12,17 @@ public class EntityHealthDisplay : MonoBehaviour
     [BoxGroup("References")]
     public EntityHealthManager healthManager;
     [BoxGroup("References")]
+    public GameObject healthObject;
+    [BoxGroup("References")]
     public TMP_Text healthText;
     [BoxGroup("References")]
     public Slider healthSlider;
 
-    public void Start(){
+    public void Start()
+    {
+        if(healthObject){
+            healthObject.SetActive(true);
+        }
         UpdateDisplay();
     }
 
@@ -29,17 +35,9 @@ public class EntityHealthDisplay : MonoBehaviour
             healthSlider.maxValue = healthManager.maxHealth;
             healthSlider.value = healthManager.currentHealth;
 
-            if(healthManager.currentHealth >= healthManager.maxHealth){
-                StartCoroutine(HideHealthCo());
-            }else{
+            if(healthManager.currentHealth < healthManager.maxHealth){
                 healthSlider.gameObject.SetActive(true);
             }
         }
-    }
-
-    public IEnumerator HideHealthCo()
-    {
-        yield return new WaitForSeconds(4f);
-        healthSlider.gameObject.SetActive(false);
     }
 }

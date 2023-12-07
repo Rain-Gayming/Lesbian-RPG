@@ -24,6 +24,7 @@ public class CStats
     
     [BoxGroup("Minor Stats")]
     public MinorStats minorStats;
+
 }
 
 [System.Serializable]
@@ -35,6 +36,7 @@ public class MinorStats
     public ConstitutionStats constitutionStats;
 }
 
+[System.Serializable]
 public class StrengthStats
 {
     public int longWeapons;
@@ -42,6 +44,7 @@ public class StrengthStats
     public int heavyArmour;
     public int mediumArmour;    
 }
+[System.Serializable]
 public class DexterityStats
 {
     public int speed;
@@ -49,12 +52,14 @@ public class DexterityStats
     public int agility;
     public int lightArmour;    
 }
+[System.Serializable]
 public class IntelligenceStats
 {
     public int enchanting;
     public int alchemy;
     public int spellPower;    
 }
+[System.Serializable]
 public class ConstitutionStats
 {
     public int illnessResistence;

@@ -97,7 +97,7 @@ public class Settings : MonoBehaviour
 
         if(File.Exists(savePath) && SceneManager.GetActiveScene().name == "MainMenu"){
             StartCoroutine(LoadCo());
-        }else{ 
+        }else if(!File.Exists(savePath) && SceneManager.GetActiveScene().name == "MainMenu"){ 
             LoadDefaults();
         }
     }
@@ -261,7 +261,6 @@ public class Settings : MonoBehaviour
 
     public IEnumerator LoadCo()
     {
-        print("loading");
         settingsObject.position = new Vector3(10000, 10000, 0);
         settingsMenu.Enable();
         LoadSettings();

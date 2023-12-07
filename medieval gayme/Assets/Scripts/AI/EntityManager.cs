@@ -4,13 +4,13 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EntityManager : MonoBehaviour
 {
     [BoxGroup("References")]
     public NPCObject npcObject;
-    [BoxGroup("References")]
-    public GameObject playerObject;
+    
     [BoxGroup("References")]
     public SphereCollider sphereCollider;
     [BoxGroup("References/Scripts")]
@@ -28,7 +28,7 @@ public class EntityManager : MonoBehaviour
     public void Awake()
     {
         sphereCollider.radius = npcObject.chaseRange;
-        playerObject = FindObjectOfType<PlayerMovement>().gameObject;
+        sphereCollider.center = new Vector3(0, 1, npcObject.chaseRange - 0.5f);
         entityHealthManager.maxHealth = Random.Range(npcObject.minHealth, npcObject.maxHealth);
     }
 
@@ -45,19 +45,23 @@ public class EntityManager : MonoBehaviour
             entityHealthManager.HealthChange(5 * spellUsage.amplifyModifier, true);
         }
         if(spellUsage.isQuickening){
-            entityAIManager.speedMult = entityAIManager.speed * 2 * spellUsage.amplifyModifier;
+            entityAIManager.speedMult = entityAIManager.speed * 2 * spellUsage.lengthenModifier;
         }
         if(spellUsage.isSlowing){
-            entityAIManager.speedMult = entityAIManager.speed * 0.5f * spellUsage.amplifyModifier;
+            entityAIManager.speedMult = entityAIManager.speed * 0.5f * spellUsage.lengthenModifier;
         }
         if(spellUsage.isJump){
             entityAIManager.velocity.y = 7 * spellUsage.amplifyModifier;
             entityAIManager.Jump();
         }
         if(spellUsage.isBounce){
+            entityAIManager.velocity.y = 7 * spellUsage.amplifyModifier;
+            entityAIManager.Jump();
             //bounceWaitTimer = bounceWaitTime;
         }
         if(spellUsage.isLeaping){
+            entityAIManager.velocity.y = 7 * spellUsage.amplifyModifier;
+            entityAIManager.Jump();
             //playerMovement.isLeap = true;
             //playerMovement.direction += Camera.main.transform.forward * spellUsage.amplifyModifier;
             //playerMovement.velocity.y = 10 * spellUsage.amplifyModifier;
@@ -68,23 +72,12 @@ public class EntityManager : MonoBehaviour
         if(spellUsage.isWeakening){
             entityCombatManager.attackModifier = 0.5f * spellUsage.amplifyModifier;
         }
+        if(spellUsage.isCalming){
+            entityCombatManager.isCalmed = true;
+            entityCombatManager.calmingTimer = 5f * spellUsage.lengthenModifier;
+        }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player"){
-            entityCombatManager.currentTarget = playerObject.transform;
-            entityCombatManager.targetInRange = true;
-        }    
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Player"){
-            entityCombatManager.currentTarget = null;
-            entityCombatManager.targetInRange = false;
-            entityAIManager.SetPoint(Vector3.zero, null);
-        }    
-    }
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, npcObject.chaseRange);

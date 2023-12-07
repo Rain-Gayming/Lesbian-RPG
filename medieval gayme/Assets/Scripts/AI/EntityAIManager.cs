@@ -12,7 +12,11 @@ public class EntityAIManager : MonoBehaviour
     [BoxGroup("References")]
     public NavMeshAgent agent;
     [BoxGroup("References")]
-    public Rigidbody rigidbody;
+    public NPCObject npcObject;
+    [BoxGroup("References")]
+    public Rigidbody rb;
+    [BoxGroup("References")]
+    public GameObject playerObject;
     
     [BoxGroup("AI")]
     public AIState currentState;
@@ -39,7 +43,9 @@ public class EntityAIManager : MonoBehaviour
     public Vector3 velocity;
 
     void Start() {
+        playerObject = FindObjectOfType<PlayerMovement>().gameObject;
         entityManager = GetComponent<EntityManager>();
+        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 
         SetPoint(Vector3.zero, null);
@@ -47,7 +53,7 @@ public class EntityAIManager : MonoBehaviour
 
     public void Jump()
     {
-        rigidbody.AddForce(velocity, ForceMode.Impulse);
+        rb.AddForce(velocity, ForceMode.Impulse);
     }
 
     public void Update()
@@ -65,7 +71,6 @@ public class EntityAIManager : MonoBehaviour
                     waitTimer -= Time.deltaTime;
                     waiting = true;
                     currentPoint = null;
-                    print("points are same");
                 }
             }
         }
@@ -99,7 +104,7 @@ public class EntityAIManager : MonoBehaviour
         }
         waiting = false;
         
-        float dist = Vector3.Distance(currentPoint.transform.position, entityManager.playerObject.transform.position);
+        float dist = Vector3.Distance(currentPoint.transform.position, playerObject.transform.position);
 
         if(dist <= entityManager.npcObject.patrolRadius){
     

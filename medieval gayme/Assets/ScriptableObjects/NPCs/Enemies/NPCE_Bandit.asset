@@ -19,3 +19,4 @@ MonoBehaviour:
   patrolRadius: 30
   aggressionLevel: 2
   chaseRange: 20
+  attackRange: 2

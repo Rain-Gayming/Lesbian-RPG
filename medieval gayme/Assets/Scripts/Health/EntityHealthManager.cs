@@ -11,6 +11,14 @@ public class EntityHealthManager : MonoBehaviour
     [BoxGroup("References")]
     public EntityHealthDisplay healthDisplay;
 
+    [BoxGroup("Invincivibility")]
+    public float invincivibilityTime = 0.3f;
+    [BoxGroup("Invincivibility")]
+    public float invincivibilityTimer;
+    [BoxGroup("Invincivibility")]
+    public bool canTakeDamage;
+
+
     [BoxGroup("Health")]
     public float maxHealth;
     [BoxGroup("Health")]
@@ -33,22 +41,34 @@ public class EntityHealthManager : MonoBehaviour
 
     public void Update()
     {
-        if(currentHealth < maxHealth){
+        if(healthRegenTimer > 0){
             healthRegenTimer -= Time.deltaTime;
+        }
+
+        if(currentHealth < maxHealth){
 
             if(healthRegenTimer <= 0){
                 HealthChange(healthRegenAmount, false);
                 healthRegenTimer = healthRegenTime;
             }
         }
+
+        if(invincivibilityTimer > 0){
+            canTakeDamage = false;
+            invincivibilityTimer -= Time.deltaTime;                                                             
+        }else{
+            canTakeDamage = true;
+        }
     }
 
     [Button]
     public void HealthChange(float change, bool damage)
     {
-        if(damage){
+        if(damage && canTakeDamage){
             currentHealth -= change;
             healthRegenTimer = healthRegenTime;
+            invincivibilityTimer = invincivibilityTime;
+            canTakeDamage = false;
         }else{
             currentHealth += change;
         }

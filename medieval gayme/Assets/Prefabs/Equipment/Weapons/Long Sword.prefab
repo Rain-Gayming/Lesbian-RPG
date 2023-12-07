@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 255807711571176499}
   - component: {fileID: 3494838377693163239}
-  m_Layer: 0
+  - component: {fileID: 6865782800273874905}
+  m_Layer: 9
   m_Name: Long Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,12 +49,27 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 4.3058343, z: 1}
+  m_Center: {x: -0.00000001422864, y: 1.6529173, z: 0.00000020045114}
+--- !u!114 &6865782800273874905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4005279307977818452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b889be2f28e6345b5523b9f2a34d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBox: {fileID: 3494838377693163239}
+  weaponItem: {fileID: 11400000, guid: a7cbe451bb64dce4b8b7138937cb3b86, type: 2}
+  damage: 0
 --- !u!1 &5693437784857947958
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +81,7 @@ GameObject:
   - component: {fileID: 3787245961934040133}
   - component: {fileID: 1602874377539342181}
   - component: {fileID: 462009666078828572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
