@@ -69,6 +69,7 @@ public class QuestJournel : MonoBehaviour
     [Button]
     public void UpdateQuestSteps(Quest quest)
     {
+        questNameText.text = quest.currentQuest.questName;
         for (int i = 0; i < questStepList.Count; i++)
         {
             Destroy(questStepList[i]);

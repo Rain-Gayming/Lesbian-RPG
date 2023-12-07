@@ -33,8 +33,9 @@ public class DialogBoxUI : MonoBehaviour
         instance = this;
     }
 
-    public void StartDialog(bool talkedTo)
+    public void StartDialog(DialogObject dialog, bool talkedTo)
     {
+        currentDialog = dialog;
         MenuManager.instance.ChangeMenuWithPause(dialogMenu);
         if(!talkedTo){
             currentLine = currentDialog.firstLine;

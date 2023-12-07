@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c5567f096e08774e9b5ce3cb42551fa, type: 2}
   - {fileID: 11400000, guid: b4119bcb02ada774dadf18fc2ba255c2, type: 2}
   - {fileID: 11400000, guid: 8ad8fa6128aa7ca40b02d2311e7ed285, type: 2}
+  - {fileID: 11400000, guid: 3d9ff7fe5632a81409ed233a7d72b204, type: 2}
   questToGive: {fileID: 0}
   itemReward:
     item: {fileID: 0}

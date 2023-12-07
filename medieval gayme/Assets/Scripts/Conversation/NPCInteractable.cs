@@ -13,8 +13,7 @@ public class NPCInteractable : Interactable
 
     public override void Interact()
     {
-        DialogBoxUI.instance.currentDialog = npcInformation.dialog;
-        DialogBoxUI.instance.StartDialog(talkedTo);
+        DialogBoxUI.instance.StartDialog(npcInformation.dialog, talkedTo);
 
         talkedTo = true;
 

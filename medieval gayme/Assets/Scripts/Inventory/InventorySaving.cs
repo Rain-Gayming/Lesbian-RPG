@@ -25,10 +25,7 @@ public class InventorySaving : MonoBehaviour
 
     [Button]
     public void LoadInventory()
-    {                
-        if(!File.Exists(inventorySavePath)){
-            inventorySavePath = Application.persistentDataPath + "/" + MainMenuManager.instance.playerName + "_Inventory.json";  
-        }    
+    {
         string fileContents = File.ReadAllText(inventorySavePath);
 
         inventorySave = JsonUtility.FromJson<InventorySave>(fileContents);

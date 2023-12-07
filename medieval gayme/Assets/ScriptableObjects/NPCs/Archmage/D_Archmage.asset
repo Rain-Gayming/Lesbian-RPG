@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b70965fdbddce540b95590da2163f49, type: 3}
+  m_Name: D_Archmage
+  m_EditorClassIdentifier: 
+  firstLine: {fileID: 11400000, guid: 34382db9079a5e14b9ef86ae8611f5f1, type: 2}
+  returningLine: {fileID: 11400000, guid: c3d0d96fbf2121a4c9d98bfe1306f52e, type: 2}
+  npc: {fileID: 11400000, guid: 590977d39f64a4f4d895e22ccc1a4273, type: 2}
