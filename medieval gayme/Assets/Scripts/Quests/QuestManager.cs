@@ -21,7 +21,8 @@ public class QuestManager : MonoBehaviour
 
     public void Start()
     {
-        QuestJournel.instance.UpdateQuestJournel(quests);
+        if(quests.Count != 0)
+            QuestJournel.instance.UpdateQuestJournel(quests);
     }
 
     public void AddQuest(QuestObject quest)

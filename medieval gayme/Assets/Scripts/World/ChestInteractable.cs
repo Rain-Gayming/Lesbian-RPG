@@ -17,7 +17,8 @@ public class ChestInteractable : Interactable
     public override void Interact()
     {
         if(!hasBeenOpened){
-            chestItems = lootPool.GenerateLoot();
+            if(lootPool)
+                chestItems = lootPool.GenerateLoot();
             hasBeenOpened = true;
         }
 

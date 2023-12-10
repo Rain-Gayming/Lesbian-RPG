@@ -12,6 +12,8 @@ public class SaveManager : MonoBehaviour
     public PlayerSaveData playerSaveData;
     public string playerSavePath;   
     [BoxGroup("Refernces")]
+    public SpellBook spellBook;
+    [BoxGroup("Refernces")]
     public GameObject player;
     [BoxGroup("Refernces")]
     public InventorySaving inventorySave;
@@ -40,7 +42,7 @@ public class SaveManager : MonoBehaviour
     [Button]
     public void Save()
     {
-        SpellBook.instance.SaveSpells();
+        spellBook.SaveSpells();
         inventorySave.SaveInventory();
         worldManager.SaveWorld();
         SavePlayer();
@@ -48,7 +50,7 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
-        SpellBook.instance.LoadSpells();
+        spellBook.LoadSpells();
         inventorySave.LoadInventory();
         worldManager.LoadWorld();
         LoadPlayer();

@@ -21,6 +21,8 @@ public class EntityAIManager : MonoBehaviour
     [BoxGroup("AI")]
     public AIState currentState;
     [BoxGroup("AI")]
+    public bool onlyUsePersonal;
+    [BoxGroup("AI")]
     public List<GameObject> personalPoints;
     [BoxGroup("AI")]
     public GameObject currentPoint;
@@ -82,8 +84,12 @@ public class EntityAIManager : MonoBehaviour
 
     public Vector3 FindPoint()
     {   
-        int currentPointVal = Random.Range(0, AIPointManager.instance.points.Count + personalPoints.Count);
-        
+        int currentPointVal = 0;
+        if(!onlyUsePersonal){
+            Random.Range(0, AIPointManager.instance.points.Count + personalPoints.Count);
+        }else{
+            Random.Range(0, personalPoints.Count);            
+        }
         if(currentPointVal <= AIPointManager.instance.points.Count){
             currentPoint = AIPointManager.instance.points[currentPointVal];
         }else if(currentPointVal > AIPointManager.instance.points.Count){
